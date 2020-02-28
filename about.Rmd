@@ -9,3 +9,5 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+[My GitHub Repo](https://github.com/Juggereggnog/final_project_v1)
+
