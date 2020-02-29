@@ -1,0 +1,24 @@
+4 Ornithopter (AER) 167
+4 Sai, Master Thopterist (M19) 69
+2 Baral's Expertise (AER) 29
+3 Commit // Memory (NON) 0
+4 Reverse Engineer (NON) 0
+4 Paradoxical Outcome (KLD) 60
+2 Aetherflux Reservoir (KLD) 192
+4 Inspiring Statuary (AER) 160
+2 Mox Amber (DOM) 224
+4 Navigator's Compass (DOM) 225
+4 Prophetic Prism (NON) 0
+4 Renegade Map (AER) 173
+1 Inventors' Fair (KLD) 247
+13 Island (UND) 90
+1 Field of Ruin (THB) 242
+4 Zhalfirin Void (DOM) 249
+
+
+4 Negate (M20) 69
+2 Jace's Defeat (NON) 0
+2 Fireforger's Puzzleknot (KLD) 213
+3 Glint-Nest Crane (KLD) 50
+3 Metalspinner's Puzzleknot (KLD) 221
+1 Sorcerous Spyglass (ELD) 233

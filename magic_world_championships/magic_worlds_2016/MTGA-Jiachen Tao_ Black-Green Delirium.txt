@@ -1,0 +1,32 @@
+4 Liliana, the Last Hope (NON) 0
+1 Den Protector (C19) 161
+1 Emrakul, the Promised End (NON) 0
+2 Ishkanah, Grafwidow (NON) 0
+1 Kalitas, Traitor of Ghet (NON) 0
+2 Nissa, Vastwood Seer (NON) 0
+4 Sylvan Advocate (NON) 0
+3 Tireless Tracker (NON) 0
+2 Languish (NON) 0
+3 Ruinous Path (NON) 0
+2 Transgress the Mind (NON) 0
+3 Traverse the Ulvenwald (NON) 0
+4 Grasp of Darkness (GN2) 30
+1 To the Slaughter (NON) 0
+1 Ultimate Price (NON) 0
+2 Vessel of Nascency (NON) 0
+4 Evolving Wilds (C19) 241
+5 Forest (UND) 96
+4 Hissing Quagmire (NON) 0
+4 Llanowar Wastes (C19) 258
+7 Swamp (UND) 92
+
+
+1 Kalitas, Traitor of Ghet (NON) 0
+2 Languish (NON) 0
+2 Transgress the Mind (NON) 0
+2 Ob Nixilis Reignited (C19) 124
+1 Noose Constrictor (NON) 0
+1 Call the Bloodline (NON) 0
+1 Dead Weight (GRN) 67
+2 Duress (M20) 97
+3 Infinite Obliteration (NON) 0

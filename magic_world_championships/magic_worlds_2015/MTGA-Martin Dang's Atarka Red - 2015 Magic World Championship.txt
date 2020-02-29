@@ -1,0 +1,25 @@
+2 Abbot of Keral Keep (NON) 0
+4 Foundry Street Denizen (NON) 0
+2 Goblin Rabblemaster (NON) 0
+4 Monastery Swiftspear (NON) 0
+3 Zurgo Bellstriker (NON) 0
+4 Dragon Fodder (NON) 0
+4 Hordeling Outburst (NON) 0
+4 Atarka's Command (NON) 0
+1 Become Immense (NON) 0
+4 Lightning Strike (GN2) 42
+4 Stoke the Flames (NON) 0
+4 Wild Slash (NON) 0
+1 Forest (UND) 96
+4 Mana Confluence (NON) 0
+10 Mountain (UND) 94
+1 Temple of Abandon (THB) 244
+4 Wooded Foothills (NON) 0
+
+
+2 Goblin Rabblemaster (NON) 0
+4 Eidolon of the Great Revel (NON) 0
+1 Goblin Heelcutter (NON) 0
+2 Destructive Revelry (NON) 0
+3 Roast (NON) 0
+3 Searing Blood (NON) 0

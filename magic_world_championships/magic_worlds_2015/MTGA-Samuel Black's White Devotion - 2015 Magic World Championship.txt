@@ -1,0 +1,25 @@
+1 Anafenza, Kin-Tree Spirit (NON) 0
+4 Archangel of Tithes (NON) 0
+3 Brimaz, King of Oreskos (NON) 0
+3 Hangarback Walker (NON) 0
+4 Knight of the White Orchid (NON) 0
+2 Kytheon, Hero of Akros (NON) 0
+4 Soldier of the Pantheon (NON) 0
+4 Wingmate Roc (C19) 78
+3 Valorous Stance (NON) 0
+3 Banishing Light (THB) 4
+4 Mastery of the Unseen (NON) 0
+3 Nykthos, Shrine to Nyx (NON) 0
+1 Foundry of the Consuls (NON) 0
+21 Plains (UND) 88
+
+
+1 Banishing Light (THB) 4
+1 Valorous Stance (NON) 0
+2 Elspeth, Sun's Champion (NON) 0
+1 High Sentinels of Arashin (NON) 0
+3 Celestial Flare (NON) 0
+2 Glare of Heresy (NON) 0
+1 Revoke Existence (THB) 34
+2 Surge of Righteousness (NON) 0
+2 Tragic Arrogance (NON) 0

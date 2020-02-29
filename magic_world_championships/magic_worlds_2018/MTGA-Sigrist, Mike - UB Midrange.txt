@@ -1,0 +1,32 @@
+1 Liliana, Death's Majesty (NON) 0
+4 Glint-Sleeve Siphoner (AER) 62
+4 Champion of Wits (NON) 0
+3 The Scarab God (NON) 0
+2 Torrential Gearhulk (KLD) 67
+2 Doomfall (NON) 0
+1 Commit // Memory (NON) 0
+2 Censor (NON) 0
+2 Essence Scatter (M19) 54
+4 Vraska's Contempt (XLN) 129
+4 Fatal Push (AER) 57
+2 Cast Down (DOM) 81
+1 Supreme Will (NON) 0
+2 Arguel's Blood Fast (XLN) 90
+4 Aether Hub (KLD) 242
+2 Field of Ruin (THB) 242
+4 Drowned Catacomb (XLN) 253
+4 Fetid Pools (NON) 0
+5 Island (UND) 90
+7 Swamp (UND) 92
+
+
+1 Cast Down (DOM) 81
+1 Sorcerous Spyglass (ELD) 233
+1 Infernal Reckoning (M19) 102
+2 Essence Extraction (KLD) 80
+2 Jace's Defeat (NON) 0
+1 Negate (M20) 69
+1 Glimmer of Genius (KLD) 49
+2 Walking Ballista (AER) 181
+1 Fungal Infection (DOM) 94
+3 Duress (M20) 97

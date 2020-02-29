@@ -1,0 +1,28 @@
+1 Chandra, Torch of Defiance (KLD) 110
+4 Bomat Courier (KLD) 199
+4 Soul-Scar Mage (NON) 0
+4 Earthshaker Khenra (NON) 0
+4 Scrapheap Scrounger (KLD) 231
+2 Ahn-Crop Crasher (NON) 0
+4 Goblin Chainwhirler (DOM) 129
+4 Hazoret the Fervent (NON) 0
+3 Shock (M20) 160
+1 Magma Spray (NON) 0
+2 Abrade (NON) 0
+2 Lightning Strike (GN2) 42
+2 The Flame of Keld (DOM) 123
+17 Mountain (UND) 94
+2 Aether Hub (KLD) 242
+4 Dragonskull Summit (XLN) 252
+
+
+1 Magma Spray (NON) 0
+2 Chandra, Torch of Defiance (KLD) 110
+2 Duress (M20) 97
+1 Swamp (UND) 92
+1 Angrath, the Flame-Chained (RIX) 152
+2 Karn, Scion of Urza (DOM) 1
+2 Fight with Fire (DOM) 119
+1 Glorybringer (NON) 0
+1 Siege-Gang Commander (DOM) 143
+2 Chandra's Defeat (NON) 0

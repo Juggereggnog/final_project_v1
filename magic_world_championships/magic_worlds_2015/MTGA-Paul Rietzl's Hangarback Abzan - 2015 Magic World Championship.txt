@@ -1,0 +1,37 @@
+1 Ajani, Mentor of Heroes (NON) 0
+2 Elspeth, Sun's Champion (NON) 0
+1 Sorin, Solemn Visitor (NON) 0
+4 Anafenza, the Foremost (NON) 0
+2 Den Protector (C19) 161
+4 Fleecemane Lion (NON) 0
+4 Hangarback Walker (NON) 0
+4 Siege Rhino (NON) 0
+2 Wingmate Roc (C19) 78
+4 Abzan Charm (NON) 0
+2 Dromoka's Command (NON) 0
+1 Hero's Downfall (NON) 0
+1 Murderous Cut (NON) 0
+1 Ultimate Price (NON) 0
+1 Valorous Stance (NON) 0
+3 Caves of Koilos (NON) 0
+2 Forest (UND) 96
+3 Llanowar Wastes (C19) 258
+2 Plains (UND) 88
+4 Sandsteppe Citadel (NON) 0
+2 Temple of Malady (M20) 254
+2 Temple of Plenty (THB) 248
+3 Temple of Silence (M20) 256
+1 Urborg, Tomb of Yawgmoth (NON) 0
+4 Windswept Heath (NON) 0
+
+
+1 Dromoka's Command (NON) 0
+1 Hero's Downfall (NON) 0
+2 Ultimate Price (NON) 0
+1 Herald of Torment (NON) 0
+1 Tasigur, the Golden Fang (NON) 0
+1 Bile Blight (NON) 0
+1 Self-Inflicted Wound (NON) 0
+1 Surge of Righteousness (NON) 0
+4 Thoughtseize (NON) 0
+2 Tragic Arrogance (NON) 0

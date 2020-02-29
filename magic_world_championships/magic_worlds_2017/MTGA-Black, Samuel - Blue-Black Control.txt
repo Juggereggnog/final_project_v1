@@ -1,0 +1,26 @@
+3 Torrential Gearhulk (KLD) 67
+2 The Scarab God (NON) 0
+1 Harsh Scrutiny (KLD) 85
+4 Censor (NON) 0
+4 Fatal Push (AER) 57
+4 Essence Scatter (M19) 54
+4 Disallow (AER) 31
+4 Vraska's Contempt (XLN) 129
+4 Hieroglyphic Illumination (NON) 0
+1 Supreme Will (NON) 0
+3 Search for Azcanta (XLN) 74
+5 Swamp (UND) 92
+3 Field of Ruin (THB) 242
+4 Fetid Pools (NON) 0
+6 Island (UND) 90
+4 Evolving Wilds (C19) 241
+4 Drowned Catacomb (XLN) 253
+
+
+1 Torrential Gearhulk (KLD) 67
+2 Vizier of Many Faces (NON) 0
+2 Negate (M20) 69
+1 Arguel's Blood Fast (XLN) 90
+4 Duress (M20) 97
+1 Gonti, Lord of Luxury (KLD) 84
+4 Essence Extraction (KLD) 80

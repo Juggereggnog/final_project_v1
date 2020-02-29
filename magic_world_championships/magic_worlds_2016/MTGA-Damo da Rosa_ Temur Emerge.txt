@@ -1,0 +1,34 @@
+1 Kiora, Master of the Depths (NON) 0
+4 Elder Deep-Fiend (NON) 0
+1 Emrakul, the Promised End (NON) 0
+2 Gnarlwood Dryad (NON) 0
+2 Ishkanah, Grafwidow (NON) 0
+4 Jace, Vryn's Prodigy (NON) 0
+1 Lashweed Lurker (NON) 0
+2 Nissa, Vastwood Seer (NON) 0
+4 Pilgrim's Eye (NON) 0
+3 Gather the Pack (NON) 0
+3 Traverse the Ulvenwald (NON) 0
+4 Grapple with the Past (NON) 0
+4 Kozilek's Return (NON) 0
+2 Vessel of Nascency (NON) 0
+1 Evolving Wilds (C19) 241
+6 Forest (UND) 96
+3 Island (UND) 90
+3 Lumbering Falls (NON) 0
+1 Mountain (UND) 94
+1 Sanctum of Ugin (NON) 0
+4 Shivan Reef (NON) 0
+4 Yavimaya Coast (C19) 287
+
+
+1 Emrakul, the Promised End (NON) 0
+1 Gnarlwood Dryad (NON) 0
+1 Sanctum of Ugin (NON) 0
+2 Eldrazi Obligator (NON) 0
+2 Reality Smasher (NON) 0
+2 Tireless Tracker (NON) 0
+1 Learn from the Past (NON) 0
+2 Pulse of Murasa (M20) 189
+2 Radiant Flames (NON) 0
+1 Titan's Presence (NON) 0

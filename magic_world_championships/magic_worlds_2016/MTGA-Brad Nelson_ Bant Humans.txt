@@ -1,0 +1,29 @@
+1 Tamiyo, Field Researcher (NON) 0
+2 Duskwatch Recruiter (NON) 0
+2 Knight of the White Orchid (NON) 0
+4 Lambholt Pacifist (NON) 0
+4 Reflector Mage (NON) 0
+4 Thalia's Lieutenant (NON) 0
+3 Thalia, Heretic Cathar (NON) 0
+3 Thraben Inspector (NON) 0
+4 Tireless Tracker (NON) 0
+4 Collected Company (NON) 0
+4 Dromoka's Command (NON) 0
+2 Canopy Vista (NON) 0
+4 Evolving Wilds (C19) 241
+3 Forest (UND) 96
+4 Fortified Village (NON) 0
+1 Island (UND) 90
+6 Plains (UND) 88
+3 Prairie Stream (C19) 265
+2 Yavimaya Coast (C19) 287
+
+
+1 Tamiyo, Field Researcher (NON) 0
+1 Knight of the White Orchid (NON) 0
+3 Gideon, Ally of Zendikar (NON) 0
+2 Nissa, Vastwood Seer (NON) 0
+2 Day's Undoing (NON) 0
+2 Declaration in Stone (NON) 0
+2 Negate (M20) 69
+2 Tragic Arrogance (NON) 0

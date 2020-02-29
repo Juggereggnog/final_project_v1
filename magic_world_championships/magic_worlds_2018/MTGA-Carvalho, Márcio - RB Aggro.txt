@@ -1,0 +1,32 @@
+2 Chandra, Torch of Defiance (KLD) 110
+1 Karn, Scion of Urza (DOM) 1
+4 Bomat Courier (KLD) 199
+4 Scrapheap Scrounger (KLD) 231
+2 Kari Zev, Skyship Raider (AER) 87
+2 Pia Nalaar (KLD) 124
+4 Goblin Chainwhirler (DOM) 129
+2 Rekindling Phoenix (RIX) 111
+2 Hazoret the Fervent (NON) 0
+2 Glorybringer (NON) 0
+2 Doomfall (NON) 0
+1 Cut // Ribbons (NON) 0
+2 Magma Spray (NON) 0
+3 Abrade (NON) 0
+2 Heart of Kiran (AER) 153
+4 Dragonskull Summit (XLN) 252
+4 Canyon Slough (NON) 0
+2 Aether Hub (KLD) 242
+14 Mountain (UND) 94
+1 Swamp (UND) 92
+
+
+1 Pia Nalaar (KLD) 124
+1 Chandra, Torch of Defiance (KLD) 110
+2 Karn, Scion of Urza (DOM) 1
+1 Magma Spray (NON) 0
+2 Doomfall (NON) 0
+1 Siege-Gang Commander (DOM) 143
+3 Chandra's Defeat (NON) 0
+1 The Eldest Reborn (C19) 131
+2 Duress (M20) 97
+1 Sorcerous Spyglass (ELD) 233

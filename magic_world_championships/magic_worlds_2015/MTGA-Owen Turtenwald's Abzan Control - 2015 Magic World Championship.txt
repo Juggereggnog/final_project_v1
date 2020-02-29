@@ -1,0 +1,34 @@
+2 Elspeth, Sun's Champion (NON) 0
+4 Courser of Kruphix (NON) 0
+4 Den Protector (C19) 161
+1 Dragonlord Dromoka (NON) 0
+2 Nissa, Vastwood Seer (NON) 0
+4 Siege Rhino (NON) 0
+2 Languish (NON) 0
+4 Thoughtseize (NON) 0
+4 Abzan Charm (NON) 0
+2 Bile Blight (NON) 0
+3 Hero's Downfall (NON) 0
+1 Murderous Cut (NON) 0
+1 Ultimate Price (NON) 0
+3 Caves of Koilos (NON) 0
+4 Forest (UND) 96
+1 Llanowar Wastes (C19) 258
+1 Plains (UND) 88
+4 Sandsteppe Citadel (NON) 0
+4 Temple of Malady (M20) 254
+4 Temple of Silence (M20) 256
+1 Urborg, Tomb of Yawgmoth (NON) 0
+4 Windswept Heath (NON) 0
+
+
+1 Ultimate Price (NON) 0
+1 Ugin, the Spirit Dragon (NON) 0
+2 Arashin Cleric (NON) 0
+2 Dromoka's Command (NON) 0
+1 Drown in Sorrow (NON) 0
+1 Duress (M20) 97
+2 End Hostilities (NON) 0
+1 Palace Siege (NON) 0
+2 Read the Bones (NON) 0
+2 Valorous Stance (NON) 0

@@ -1,0 +1,37 @@
+1 Ashiok, Nightmare Weaver (NON) 0
+1 Ugin, the Spirit Dragon (NON) 0
+4 Dragonlord Ojutai (NON) 0
+1 Silumgar, the Drifting Death (NON) 0
+2 Crux of Fate (NON) 0
+1 Languish (NON) 0
+3 Thoughtseize (NON) 0
+1 Anticipate (M20) 45
+2 Bile Blight (NON) 0
+4 Dig Through Time (NON) 0
+2 Dissolve (NON) 0
+2 Foul-Tongue Invocation (NON) 0
+4 Hero's Downfall (NON) 0
+4 Silumgar's Scorn (NON) 0
+1 Ultimate Price (NON) 0
+2 Caves of Koilos (NON) 0
+4 Dismal Backwater (M20) 245
+1 Flooded Strand (NON) 0
+2 Haven of the Spirit Dragon (NON) 0
+3 Island (UND) 90
+4 Polluted Delta (NON) 0
+2 Swamp (UND) 92
+4 Temple of Deceit (THB) 245
+4 Temple of Enlightenment (THB) 246
+1 Urborg, Tomb of Yawgmoth (NON) 0
+
+
+2 Ashiok, Nightmare Weaver (NON) 0
+1 Foul-Tongue Invocation (NON) 0
+1 Thoughtseize (NON) 0
+2 Ultimate Price (NON) 0
+1 Dragonlord Silumgar (NON) 0
+3 Jace, Vryn's Prodigy (NON) 0
+2 Tasigur, the Golden Fang (NON) 0
+1 Orbs of Warding (NON) 0
+1 Perilous Vault (NON) 0
+1 Tormod's Crypt (NON) 0

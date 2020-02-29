@@ -1,0 +1,32 @@
+4 Longtusk Cub (KLD) 161
+4 Servant of the Conduit (KLD) 169
+4 Rogue Refiner (AER) 135
+4 Whirler Virtuoso (KLD) 190
+3 Bristling Hydra (KLD) 147
+4 Glorybringer (NON) 0
+4 Attune with Aether (KLD) 145
+1 Confiscation Coup (KLD) 41
+1 Commit // Memory (NON) 0
+4 Harnessed Lightning (KLD) 117
+1 Abrade (NON) 0
+2 Essence Scatter (M19) 54
+2 Magma Spray (NON) 0
+4 Aether Hub (KLD) 242
+4 Botanical Sanctum (KLD) 244
+3 Spirebluff Canal (KLD) 249
+4 Rootbound Crag (XLN) 256
+4 Forest (UND) 96
+2 Mountain (UND) 94
+1 Island (UND) 90
+
+
+1 Abrade (NON) 0
+1 Confiscation Coup (KLD) 41
+2 Torrential Gearhulk (KLD) 67
+4 Negate (M20) 69
+1 Chandra, Torch of Defiance (KLD) 110
+2 Appetite for the Unnatural (KLD) 141
+1 Glimmer of Genius (KLD) 49
+1 Aethersphere Harvester (AER) 142
+1 Supreme Will (NON) 0
+1 Chandra's Defeat (NON) 0

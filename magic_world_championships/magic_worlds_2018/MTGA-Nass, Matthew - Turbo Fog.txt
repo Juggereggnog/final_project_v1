@@ -1,0 +1,24 @@
+4 Teferi, Hero of Dominaria (DOM) 207
+1 Karn, Scion of Urza (DOM) 1
+4 Chart a Course (XLN) 48
+3 Glimmer of Genius (KLD) 49
+4 Nexus of Fate (M19) 306
+4 Haze of Pollen (NON) 0
+4 Root Snare (RNA) 137
+1 Anticipate (M20) 45
+4 Search for Azcanta (XLN) 74
+4 Gift of Paradise (M20) 173
+3 Sunpetal Grove (XLN) 257
+4 Forest (UND) 96
+4 Irrigated Farmland (NON) 0
+2 Glacial Fortress (XLN) 255
+4 Scattered Groves (NON) 0
+4 Hinterland Harbor (DOM) 240
+6 Island (UND) 90
+
+
+3 Baral, Chief of Compliance (AER) 28
+4 Negate (M20) 69
+3 Jace's Defeat (NON) 0
+3 Walking Ballista (AER) 181
+2 Dissenter's Deliverance (NON) 0

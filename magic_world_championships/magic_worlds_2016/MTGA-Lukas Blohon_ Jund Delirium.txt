@@ -1,0 +1,32 @@
+3 Liliana, the Last Hope (NON) 0
+2 Distended Mindbender (NON) 0
+1 Emrakul, the Promised End (NON) 0
+3 Ishkanah, Grafwidow (NON) 0
+2 Nissa, Vastwood Seer (NON) 0
+3 Pilgrim's Eye (NON) 0
+3 Languish (NON) 0
+2 Transgress the Mind (NON) 0
+3 Traverse the Ulvenwald (NON) 0
+3 Fiery Impulse (NON) 0
+4 Grapple with the Past (NON) 0
+3 Kozilek's Return (NON) 0
+4 Vessel of Nascency (NON) 0
+1 Cinder Glade (C19) 236
+4 Evolving Wilds (C19) 241
+6 Forest (UND) 96
+4 Llanowar Wastes (C19) 258
+1 Mountain (UND) 94
+4 Smoldering Marsh (NON) 0
+4 Swamp (UND) 92
+
+
+1 Emrakul, the Promised End (NON) 0
+1 Languish (NON) 0
+1 Transgress the Mind (NON) 0
+1 Caustic Caterpillar (NON) 0
+2 Den Protector (C19) 161
+1 Dragonmaster Outcast (C19) 139
+2 Call the Bloodline (NON) 0
+2 Duress (M20) 97
+2 Pick the Brain (NON) 0
+2 To the Slaughter (NON) 0

@@ -9,5 +9,36 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# The About Page
+
 [My GitHub Repo](https://github.com/Juggereggnog/final_project_v1)
 
+### What Is *Magic: The Gathering*?
+
+*Magic: The Gathering* was the first collectible trading card game ever made,
+created by Wizards of the Coast in 1993. It has been regularly releasing
+expansions to its collection of cards for over 25 years, and is played in both
+physical and digital formats.
+
+Two players construct a deck of 60 cards full of creatures, lands, artifacts,
+and more and battle against each other to bring their opponent's life total
+from 20 to 0. With over 20,000 unique cards, the possibilities are daunting,
+trying to find the best combination of cards. The players who are able to find
+these combinations, and play them optimally, will eventually be invited to
+*Magic's* premier tournament: the *Magic* World Championship.
+
+
+
+### Data Sources
+
+I used up-to-date data from a website https://mtgjson.com/
+
+
+### About The Creator
+
+Elias DeLeon is currently an undergraduate at Harvard University, studying
+philosophy and government, and computer science, and any other subject he can
+get his mind on.
+
+You can contact me at eliasdeleon@college.harvard.edu or view my other
+projects on my [GitHub](https://github.com/Juggereggnog)

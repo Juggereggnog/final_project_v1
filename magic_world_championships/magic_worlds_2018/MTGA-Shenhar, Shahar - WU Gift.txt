@@ -1,0 +1,27 @@
+4 Minister of Inquiries (KLD) 57
+4 Champion of Wits (NON) 0
+2 Sunscourge Champion (NON) 0
+4 Angel of Invention (KLD) 4
+2 Lyra Dawnbringer (DOM) 26
+4 Chart a Course (XLN) 48
+4 Strategic Planning (NON) 0
+4 Refurbish (KLD) 25
+1 Fumigate (KLD) 15
+4 God-Pharaoh's Gift (NON) 0
+2 Cast Out (NON) 0
+4 Irrigated Farmland (NON) 0
+2 Aether Hub (KLD) 242
+1 Field of Ruin (THB) 242
+4 Glacial Fortress (XLN) 255
+5 Plains (UND) 88
+8 Island (UND) 90
+1 Ipnu Rivulet (NON) 0
+
+
+1 Search for Azcanta (XLN) 74
+4 History of Benalia (DOM) 21
+2 Thopter Arrest (AER) 25
+2 Baffling End (RIX) 1
+2 Negate (M20) 69
+2 Disallow (AER) 31
+2 Teferi, Hero of Dominaria (DOM) 207

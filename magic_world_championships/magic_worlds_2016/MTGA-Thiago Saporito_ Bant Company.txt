@@ -1,0 +1,35 @@
+1 Tamiyo, Field Researcher (NON) 0
+1 Archangel Avacyn (NON) 0
+4 Duskwatch Recruiter (NON) 0
+2 Elder Deep-Fiend (NON) 0
+1 Jace, Vryn's Prodigy (NON) 0
+1 Nissa, Vastwood Seer (NON) 0
+1 Noose Constrictor (NON) 0
+4 Reflector Mage (NON) 0
+2 Selfless Spirit (NON) 0
+4 Spell Queller (NON) 0
+4 Sylvan Advocate (NON) 0
+3 Tireless Tracker (NON) 0
+1 Declaration in Stone (NON) 0
+4 Collected Company (NON) 0
+1 Dromoka's Command (NON) 0
+4 Evolving Wilds (C19) 241
+3 Forest (UND) 96
+3 Fortified Village (NON) 0
+2 Island (UND) 90
+2 Lumbering Falls (NON) 0
+5 Plains (UND) 88
+3 Prairie Stream (C19) 265
+4 Yavimaya Coast (C19) 287
+
+
+1 Tireless Tracker (NON) 0
+1 Declaration in Stone (NON) 0
+2 Dromoka's Command (NON) 0
+3 Gideon, Ally of Zendikar (NON) 0
+2 Thalia, Heretic Cathar (NON) 0
+1 Clash of Wills (NON) 0
+1 Negate (M20) 69
+1 Ojutai's Command (NON) 0
+2 Summary Dismissal (NON) 0
+1 Tragic Arrogance (NON) 0

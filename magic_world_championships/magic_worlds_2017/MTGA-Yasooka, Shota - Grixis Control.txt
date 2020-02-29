@@ -1,0 +1,35 @@
+1 Nicol Bolas, God-Pharaoh (NON) 0
+1 The Scarab God (NON) 0
+2 Torrential Gearhulk (KLD) 67
+1 Hour of Devastation (NON) 0
+1 Bontu's Last Reckoning (NON) 0
+4 Fatal Push (AER) 57
+3 Glimmer of Genius (KLD) 49
+3 Supreme Will (NON) 0
+2 Vraska's Contempt (XLN) 129
+3 Disallow (AER) 31
+2 Essence Scatter (M19) 54
+1 Unlicensed Disintegration (KLD) 187
+4 Opt (ELD) 59
+2 Harnessed Lightning (KLD) 117
+3 Abrade (NON) 0
+3 Search for Azcanta (XLN) 74
+4 Dragonskull Summit (XLN) 252
+4 Drowned Catacomb (XLN) 253
+3 Island (UND) 90
+2 Swamp (UND) 92
+1 Mountain (UND) 94
+4 Spirebluff Canal (KLD) 249
+2 Evolving Wilds (C19) 241
+3 Fetid Pools (NON) 0
+1 Field of Ruin (THB) 242
+
+
+3 Negate (M20) 69
+2 Gonti, Lord of Luxury (KLD) 84
+3 Duress (M20) 97
+1 Chandra's Defeat (NON) 0
+1 Vizier of Many Faces (NON) 0
+2 Magma Spray (NON) 0
+2 Essence Extraction (KLD) 80
+1 Fiery Cannonade (XLN) 143

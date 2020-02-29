@@ -1,0 +1,23 @@
+4 Soul-Scar Mage (NON) 0
+4 Rigging Runner (XLN) 157
+4 Bomat Courier (KLD) 199
+4 Earthshaker Khenra (NON) 0
+3 Kari Zev, Skyship Raider (AER) 87
+4 Ahn-Crop Crasher (NON) 0
+2 Rampaging Ferocidon (XLN) 154
+4 Hazoret the Fervent (NON) 0
+2 Shock (M20) 160
+2 Abrade (NON) 0
+4 Lightning Strike (GN2) 42
+15 Mountain (UND) 94
+4 Ramunap Ruins (NON) 0
+4 Sunscorched Desert (NON) 0
+
+
+1 Rampaging Ferocidon (XLN) 154
+2 Abrade (NON) 0
+1 Scavenger Grounds (NON) 0
+4 Chandra, Torch of Defiance (KLD) 110
+3 Pia Nalaar (KLD) 124
+3 Aethersphere Harvester (AER) 142
+1 Glorybringer (NON) 0

@@ -1,0 +1,27 @@
+2 The Scarab God (NON) 0
+3 Torrential Gearhulk (KLD) 67
+4 Fatal Push (AER) 57
+4 Censor (NON) 0
+4 Essence Scatter (M19) 54
+4 Disallow (AER) 31
+2 Essence Extraction (KLD) 80
+3 Vraska's Contempt (XLN) 129
+4 Hieroglyphic Illumination (NON) 0
+1 Glimmer of Genius (KLD) 49
+3 Search for Azcanta (XLN) 74
+4 Fetid Pools (NON) 0
+4 Drowned Catacomb (XLN) 253
+4 Evolving Wilds (C19) 241
+6 Island (UND) 90
+5 Swamp (UND) 92
+3 Field of Ruin (THB) 242
+
+
+1 Essence Extraction (KLD) 80
+1 Field of Ruin (THB) 242
+4 Duress (M20) 97
+2 Negate (M20) 69
+1 Arguel's Blood Fast (XLN) 90
+1 Treasure Map (XLN) 250
+3 Contraband Kingpin (KLD) 177
+2 Vizier of Many Faces (NON) 0

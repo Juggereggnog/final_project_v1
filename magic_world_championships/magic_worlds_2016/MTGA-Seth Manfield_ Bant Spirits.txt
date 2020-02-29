@@ -1,0 +1,31 @@
+1 Anafenza, Kin-Tree Spirit (NON) 0
+2 Archangel Avacyn (NON) 0
+4 Mausoleum Wanderer (NON) 0
+4 Nebelgast Herald (NON) 0
+4 Rattlechains (NON) 0
+4 Reflector Mage (NON) 0
+4 Selfless Spirit (NON) 0
+4 Spell Queller (NON) 0
+2 Clash of Wills (NON) 0
+4 Collected Company (NON) 0
+2 Ojutai's Command (NON) 0
+4 Canopy Vista (NON) 0
+4 Evolving Wilds (C19) 241
+1 Forest (UND) 96
+4 Island (UND) 90
+4 Plains (UND) 88
+4 Port Town (NON) 0
+4 Yavimaya Coast (C19) 287
+
+
+1 Clash of Wills (NON) 0
+3 Gideon, Ally of Zendikar (NON) 0
+2 Tamiyo, Field Researcher (NON) 0
+1 Spectral Shepherd (NON) 0
+1 Declaration in Stone (NON) 0
+1 Essence Flux (NON) 0
+1 Learn from the Past (NON) 0
+1 Negate (M20) 69
+1 Silkwrap (NON) 0
+2 Summary Dismissal (NON) 0
+1 Tragic Arrogance (NON) 0

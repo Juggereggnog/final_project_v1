@@ -1,0 +1,35 @@
+4 Goblin Rabblemaster (NON) 0
+2 Hangarback Walker (NON) 0
+4 Jace, Vryn's Prodigy (NON) 0
+4 Mantis Rider (NON) 0
+2 Soulfire Grand Master (NON) 0
+1 Stormbreath Dragon (NON) 0
+2 Roast (NON) 0
+2 Dig Through Time (NON) 0
+1 Jeskai Charm (NON) 0
+4 Lightning Strike (GN2) 42
+3 Magma Spray (NON) 0
+3 Ojutai's Command (NON) 0
+1 Stoke the Flames (NON) 0
+2 Valorous Stance (NON) 0
+2 Battlefield Forge (NON) 0
+4 Flooded Strand (NON) 0
+2 Island (UND) 90
+1 Mountain (UND) 94
+4 Mystic Monastery (C19) 262
+2 Plains (UND) 88
+3 Shivan Reef (NON) 0
+4 Temple of Epiphany (M20) 253
+3 Temple of Triumph (M20) 257
+
+
+1 Soulfire Grand Master (NON) 0
+1 Roast (NON) 0
+1 Valorous Stance (NON) 0
+1 Elspeth, Sun's Champion (NON) 0
+2 Arashin Cleric (NON) 0
+2 Anger of the Gods (NON) 0
+2 Disdainful Stroke (GRN) 37
+1 Dissolve (NON) 0
+2 Negate (M20) 69
+2 Tragic Arrogance (NON) 0

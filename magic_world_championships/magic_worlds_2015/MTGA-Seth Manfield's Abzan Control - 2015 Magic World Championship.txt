@@ -1,0 +1,37 @@
+3 Elspeth, Sun's Champion (NON) 0
+4 Courser of Kruphix (NON) 0
+3 Den Protector (C19) 161
+2 Nissa, Vastwood Seer (NON) 0
+4 Siege Rhino (NON) 0
+1 Tasigur, the Golden Fang (NON) 0
+2 Languish (NON) 0
+4 Thoughtseize (NON) 0
+1 Tragic Arrogance (NON) 0
+4 Abzan Charm (NON) 0
+1 Bile Blight (NON) 0
+3 Hero's Downfall (NON) 0
+1 Silence the Believers (NON) 0
+1 Ultimate Price (NON) 0
+2 Caves of Koilos (NON) 0
+3 Forest (UND) 96
+2 Llanowar Wastes (C19) 258
+2 Plains (UND) 88
+4 Sandsteppe Citadel (NON) 0
+4 Temple of Malady (M20) 254
+4 Temple of Silence (M20) 256
+1 Urborg, Tomb of Yawgmoth (NON) 0
+4 Windswept Heath (NON) 0
+
+
+1 Bile Blight (NON) 0
+1 Tragic Arrogance (NON) 0
+1 Ultimate Price (NON) 0
+1 Ajani, Mentor of Heroes (NON) 0
+1 Sorin, Solemn Visitor (NON) 0
+1 Ugin, the Spirit Dragon (NON) 0
+2 Fleecemane Lion (NON) 0
+1 Dromoka's Command (NON) 0
+2 Drown in Sorrow (NON) 0
+1 Duress (M20) 97
+2 Glare of Heresy (NON) 0
+1 Unravel the Æther (NON) 0

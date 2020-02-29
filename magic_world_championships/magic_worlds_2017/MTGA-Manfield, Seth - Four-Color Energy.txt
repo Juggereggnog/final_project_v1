@@ -1,0 +1,32 @@
+2 Chandra, Torch of Defiance (KLD) 110
+3 Bristling Hydra (KLD) 147
+3 Glorybringer (NON) 0
+4 Rogue Refiner (AER) 135
+4 Servant of the Conduit (KLD) 169
+4 Longtusk Cub (KLD) 161
+3 Whirler Virtuoso (KLD) 190
+2 The Scarab God (NON) 0
+4 Attune with Aether (KLD) 145
+2 Abrade (NON) 0
+2 Magma Spray (NON) 0
+4 Harnessed Lightning (KLD) 117
+4 Aether Hub (KLD) 242
+4 Botanical Sanctum (KLD) 244
+2 Mountain (UND) 94
+1 Island (UND) 90
+4 Forest (UND) 96
+2 Spirebluff Canal (KLD) 249
+2 Sheltered Thicket (NON) 0
+3 Rootbound Crag (XLN) 256
+1 Swamp (UND) 92
+
+
+1 Chandra, Torch of Defiance (KLD) 110
+1 Abrade (NON) 0
+3 Negate (M20) 69
+2 Deathgorge Scavenger (XLN) 184
+2 Spell Pierce (XLN) 81
+1 Struggle // Survive (NON) 0
+2 Chandra's Defeat (NON) 0
+1 Vizier of Many Faces (NON) 0
+2 Nissa, Vital Force (KLD) 163
