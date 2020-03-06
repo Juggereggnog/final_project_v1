@@ -34,10 +34,13 @@ deckify <- function(data) {
   View(sample_deck)
 }
 
-files <- list.files("magic_world_championships/magic_worlds_2020",
+files <- list.files("C:/Users/jugge/Documents/R/final_project/final_project_v1/magic_world_championships/magic_worlds_2020",
                     pattern = "*.txt",
                     full.names = TRUE)
 
-deckify("magic_world_championships/magic_worlds_2020/Andrea-Mengucci-Mono-Red-Aggro-Magic-World-Championship-XXVI.txt")
+tbl_2020 <- sapply(files, deckify, simplify = FALSE) %>% 
+  bind_rows(.id = "id")
+
+tbl_2020
 ```
 
