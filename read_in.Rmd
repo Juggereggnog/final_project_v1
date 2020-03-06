@@ -20,18 +20,20 @@ glimpse(x)
 ```
 
 ```{r}
-sample_card <- read_table("magic_world_championships/magic_worlds_2020/Andrea-Mengucci-Mono-Red-Aggro-Magic-World-Championship-XXVI.txt", col_names = FALSE)
 
-sample_card$number <- str_extract(sample_card$X1, "\\d{0,3}")
+# 
 
-sample_card$abbrev <- substr(str_extract(sample_card$X1, "\\(.*?\\)"), 2, 4)
+deckify <- function(data) {
+  sample_deck <- read_table(data, col_names = FALSE) %>% 
+    mutate(duplicates = str_extract(X1, "\\d{0,3}"),
+           from_set = substr(str_extract(X1, "\\(.*?\\)"), 2, 4),
+           gatherer_id = substr(str_extract(X1, "\\) \\d{0,6}"),
+                                 2, nchar(X1)),
+           card_name = substr(X1, nchar(duplicates) + 2, nchar(X1) - nchar(from_set) - nchar(gatherer_id) - 3),
+           X1 = NULL)
+  View(sample_deck)
+}
 
-sample_card$number_2 <- substr(str_extract(sample_card$X1, "\\) \\d{0,6}"), 2, nchar(sample_card$X1))
-
-sample_card$name <- substr(sample_card$X1, nchar(sample_card$number) + 2, nchar(sample_card$X1) - nchar(sample_card$abbrev) - nchar(sample_card$number_2) - 3)
-
-sample_card$X1 <- NULL
-
-tail(sample_card)
+deckify("magic_world_championships/magic_worlds_2020/Andrea-Mengucci-Mono-Red-Aggro-Magic-World-Championship-XXVI.txt")
 ```
 
