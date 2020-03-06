@@ -34,6 +34,10 @@ deckify <- function(data) {
   View(sample_deck)
 }
 
+files <- list.files("magic_world_championships/magic_worlds_2020",
+                    pattern = "*.txt",
+                    full.names = TRUE)
+
 deckify("magic_world_championships/magic_worlds_2020/Andrea-Mengucci-Mono-Red-Aggro-Magic-World-Championship-XXVI.txt")
 ```
 
