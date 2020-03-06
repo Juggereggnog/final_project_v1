@@ -24,13 +24,14 @@ sample_card <- read_table("magic_world_championships/magic_worlds_2020/Andrea-Me
 
 sample_card$number <- str_extract(sample_card$X1, "\\d{0,3}")
 
-sample_card$abbrev <- substr(str_extract(sample_card$X1, "\\(.*?\\)"),2,4)
+sample_card$abbrev <- substr(str_extract(sample_card$X1, "\\(.*?\\)"), 2, 4)
 
-sample_card$number_2 <- substr(str_extract(sample_card$X1, "\\) \\d{0,6}"), 3, nchar(sample_card$X1) + 1)
+sample_card$number_2 <- substr(str_extract(sample_card$X1, "\\) \\d{0,6}"), 2, nchar(sample_card$X1))
 
-sample_card$name <- substr(sample_card$X1, nchar(sample_card$number)+1, nchar(sample_card$X1)- nchar(sample_card$abbrev) -nchar(sample_card$number_2)-3)
+sample_card$name <- substr(sample_card$X1, nchar(sample_card$number) + 2, nchar(sample_card$X1) - nchar(sample_card$abbrev) - nchar(sample_card$number_2) - 3)
 
 sample_card$X1 <- NULL
-View(sample_card)
+
+tail(sample_card)
 ```
 
