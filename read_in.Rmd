@@ -1,0 +1,36 @@
+---
+title: "Reading In"
+author: "Elias DeLeon"
+date: "2/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(httr)
+library(jsonlite)
+library(tidyverse)
+```
+
+```{r read}
+x <- read_csv("raw-data/AllPrintingsCSVFiles.tar.bz2")
+
+glimpse(x)
+```
+
+```{r}
+sample_card <- read_table("magic_world_championships/magic_worlds_2020/Andrea-Mengucci-Mono-Red-Aggro-Magic-World-Championship-XXVI.txt", col_names = FALSE)
+
+sample_card$number <- str_extract(sample_card$X1, "\\d{0,3}")
+
+sample_card$abbrev <- substr(str_extract(sample_card$X1, "\\(.*?\\)"),2,4)
+
+sample_card$number_2 <- substr(str_extract(sample_card$X1, "\\) \\d{0,6}"), 3, nchar(sample_card$X1) + 1)
+
+sample_card$name <- substr(sample_card$X1, nchar(sample_card$number)+1, nchar(sample_card$X1)- nchar(sample_card$abbrev) -nchar(sample_card$number_2)-3)
+
+sample_card$X1 <- NULL
+View(sample_card)
+```
+
