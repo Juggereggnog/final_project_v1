@@ -20,9 +20,6 @@ glimpse(x)
 ```
 
 ```{r}
-
-# 
-
 deckify <- function(data) {
   sample_deck <- read_table(data, col_names = FALSE) %>% 
     mutate(duplicates = str_extract(X1, "\\d{0,3}"),
@@ -31,16 +28,19 @@ deckify <- function(data) {
                                  2, nchar(X1)),
            card_name = substr(X1, nchar(duplicates) + 2, nchar(X1) - nchar(from_set) - nchar(gatherer_id) - 3),
            X1 = NULL)
-  View(sample_deck)
 }
+```
 
-files <- list.files("C:/Users/jugge/Documents/R/final_project/final_project_v1/magic_world_championships/magic_worlds_2020",
+```{r}
+files <- list.files(path = "magic_world_championships/magic_worlds_2020",
                     pattern = "*.txt",
                     full.names = TRUE)
+files
+```
 
-tbl_2020 <- sapply(files, deckify, simplify = FALSE) %>% 
-  bind_rows(.id = "id")
+```{r}
+stuff <- map(files, deckify)
 
-tbl_2020
+View(stuff)
 ```
 
