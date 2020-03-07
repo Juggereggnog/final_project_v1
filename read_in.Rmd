@@ -32,15 +32,55 @@ deckify <- function(data) {
 ```
 
 ```{r}
-files <- list.files(path = "magic_world_championships/magic_worlds_2020",
+
+find_folder <- function(x) {
+  list.files(path = paste0("magic_world_championships/magic_worlds_", x),
                     pattern = "*.txt",
                     full.names = TRUE)
-files
+}
+
+files_2015 <- find_folder(2015)
+
+files_2016 <- find_folder(2016)
+
+files_2017 <- find_folder(2017)
+
+files_2018 <- find_folder(2018)
+
+files_2020 <- find_folder(2020)
 ```
 
 ```{r}
-stuff <- map(files, deckify)
+decks_2015 <- tibble(File = files_2015) %>%
+    extract(File, "Player", "([A-Z][a-z]+-[A-Z][a-z]+)", remove = FALSE) %>%
+    mutate(Data = map(File, deckify)) %>%
+    unnest(Data) %>%
+    select(-File)
 
-View(stuff)
+decks_2016 <- tibble(File = files_2016) %>%
+    extract(File, "Player", "([A-Z][a-z]+-[A-Z][a-z]+)", remove = FALSE) %>%
+    mutate(Data = map(File, deckify)) %>%
+    unnest(Data) %>%
+    select(-File)
+
+decks_2017 <- tibble(File = files_2017) %>%
+    extract(File, "Player", "([A-Z][a-z]+-[A-Z][a-z]+)", remove = FALSE) %>%
+    mutate(Data = map(File, deckify)) %>%
+    unnest(Data) %>%
+    select(-File)
+
+decks_2018 <- tibble(File = files_2018) %>%
+    extract(File, "Player", "([A-Z][a-z]+-[A-Z][a-z]+)", remove = FALSE) %>%
+    mutate(Data = map(File, deckify)) %>%
+    unnest(Data) %>%
+    select(-File)
+
+decks_2020 <- tibble(File = files_2020) %>%
+    extract(File, "Player", "([A-Z][a-z]+-[A-Z][a-z]+)", remove = FALSE) %>%
+    mutate(Data = map(File, deckify)) %>%
+    unnest(Data) %>%
+    select(-File)
+
+View(decks_2020)
 ```
 
