@@ -18,7 +18,7 @@
 2 Forest (THB) 286
 4 Nissa, Who Shakes the World (WAR) 169 
 
- 4 Aether Gust (M20) 42
+4 Aether Gust (M20) 42
 4 Mystical Dispute (ELD) 58
 2 Negate (M20) 69
 4 Scorching Dragonfire (ELD) 139

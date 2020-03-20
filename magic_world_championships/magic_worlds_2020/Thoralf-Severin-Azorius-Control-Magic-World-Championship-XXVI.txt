@@ -16,7 +16,7 @@
 4 Narset, Parter of Veils (WAR) 61
 1 Field of Ruin (THB) 242 
 
- 1 Emergency Powers (RNA) 169
+1 Emergency Powers (RNA) 169
 1 Heliod's Intervention (THB) 19
 3 Aether Gust (M20) 42
 2 Spectral Sailor (M20) 76

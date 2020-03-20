@@ -22,7 +22,7 @@
 1 Negate (M20) 69
 2 Chemister's Insight (GRN) 32 
 
- 3 Aether Gust (M20) 42
+3 Aether Gust (M20) 42
 2 Mystical Dispute (ELD) 58
 4 Scorching Dragonfire (ELD) 139
 2 Negate (M20) 69

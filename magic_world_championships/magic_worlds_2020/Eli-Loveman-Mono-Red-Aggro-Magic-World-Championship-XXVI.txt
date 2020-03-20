@@ -13,7 +13,7 @@
 3 Shock (M20) 160
 1 Infuriate (THB) 141 
 
- 3 Lava Coil (GRN) 108
+3 Lava Coil (GRN) 108
 1 Light Up the Stage (RNA) 107
 3 Experimental Frenzy (GRN) 99
 3 Redcap Melee (ELD) 135

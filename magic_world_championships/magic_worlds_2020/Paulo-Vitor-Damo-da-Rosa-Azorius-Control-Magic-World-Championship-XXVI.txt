@@ -20,7 +20,7 @@
 2 Fabled Passage (ELD) 244
 1 Archon of Sun's Grace (THB) 3 
 
- 1 Glass Casket (ELD) 15
+1 Glass Casket (ELD) 15
 2 Archon of Sun's Grace (THB) 3
 4 Aether Gust (M20) 42
 1 Dovin's Veto (WAR) 193

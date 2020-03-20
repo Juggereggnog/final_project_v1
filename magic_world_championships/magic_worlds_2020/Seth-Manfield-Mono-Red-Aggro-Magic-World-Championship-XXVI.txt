@@ -11,7 +11,7 @@
 18 Mountain (THB) 284
 4 Robber of the Rich (ELD) 138 
 
- 1 Experimental Frenzy (GRN) 99
+1 Experimental Frenzy (GRN) 99
 4 Lava Coil (GRN) 108
 2 Chandra, Acolyte of Flame (M20) 126
 4 Unchained Berserker (M20) 164
