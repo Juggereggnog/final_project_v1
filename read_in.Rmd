@@ -52,25 +52,25 @@ files_2020 <- find_folder(2020)
 
 ```{r, include=FALSE}
 decks_2015 <- tibble(File = files_2015) %>%
-    extract(File, "Player", "(^-.*'$)", remove = FALSE) %>%
+    extract(File, "Player", "-(.*)'", remove = FALSE) %>%
     mutate(Data = map(File, deckify)) %>%
     unnest(Data) %>%
     select(-File)
 
 decks_2016 <- tibble(File = files_2016) %>%
-    extract(File, "Player", "(^-.*_$)", remove = FALSE) %>%
+    extract(File, "Player", "-(.*)_", remove = FALSE) %>%
     mutate(Data = map(File, deckify)) %>%
     unnest(Data) %>%
     select(-File)
 
 decks_2017 <- tibble(File = files_2017) %>%
-    extract(File, "Player", "([A-Z][a-z]+,[A-Z][a-z]+)", remove = FALSE) %>%
+    extract(File, "Player", "([A-Z][a-z]+, [A-Z][a-z]+)", remove = FALSE) %>%
     mutate(Data = map(File, deckify)) %>%
     unnest(Data) %>%
     select(-File)
 
 decks_2018 <- tibble(File = files_2018) %>%
-    extract(File, "Player", "([A-Z][a-z]+,[A-Z][a-z]+)", remove = FALSE) %>%
+    extract(File, "Player", "([A-Z][a-z]+, [A-Z][a-z]+)", remove = FALSE) %>%
     mutate(Data = map(File, deckify)) %>%
     unnest(Data) %>%
     select(-File)
