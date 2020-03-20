@@ -88,10 +88,20 @@ decks_2020 <- tibble(File = files_2020) %>%
     extract(File, "player", "([A-Z][a-z]+-[A-Z][a-z]+)", remove = FALSE) %>%
     mutate(Data = map(File, deckify)) %>%
     unnest(Data) %>%
-    mutate(year = 2020, player = map(strsplit(player, "-"), paste, collapse = " ")) %>% 
+    mutate(year = 2020,
+           player = map(strsplit(player, "-"), paste, collapse = " ")) %>% 
     select(-File)
 
-decks <- rbind(decks_2015, decks_2016, decks_2017, decks_2018, decks_2020)
+decks <- rbind(decks_2015, decks_2016, decks_2017, decks_2018, decks_2020) %>% 
+  unnest(player)
+
+decks <- decks %>% 
+  mutate(player = recode(player, "Damo da Rosa" = "Paulo Vitor Damo da Rosa",
+                                 "Paulo Rosa" = "Paulo Vitor Damo da Rosa",
+                                 "Paulo Vitor" = "Paulo Vitor Damo da Rosa",
+                                 "Brian Duin" = "Brian Braun-Duin",
+                                 "Josh Leyton" = "Josh Utter-Leyton",
+                                 "Jean Emmanuel" = "Jean Emmanuel Depraz"))
 ```
 
 ```{r view}
