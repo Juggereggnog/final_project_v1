@@ -13,15 +13,15 @@ library(jsonlite)
 library(tidyverse)
 ```
 
-```{r read}
+```{r read, include=FALSE}
 x <- read_csv("raw-data/AllPrintingsCSVFiles.tar.bz2")
 
 glimpse(x)
 ```
 
-```{r}
+```{r, include=FALSE}
 deckify <- function(data) {
-  sample_deck <- read_table(data, col_names = FALSE) %>% 
+  sample_deck <- read_delim(data, delim = "\n", col_names = FALSE) %>% 
     mutate(duplicates = str_extract(X1, "\\d{0,3}"),
            from_set = substr(str_extract(X1, "\\(.*?\\)"), 2, 4),
            gatherer_id = substr(str_extract(X1, "\\) \\d{0,6}"),
@@ -31,7 +31,7 @@ deckify <- function(data) {
 }
 ```
 
-```{r}
+```{r, include=FALSE}
 
 find_folder <- function(x) {
   list.files(path = paste0("magic_world_championships/magic_worlds_", x),
@@ -50,27 +50,27 @@ files_2018 <- find_folder(2018)
 files_2020 <- find_folder(2020)
 ```
 
-```{r}
+```{r, include=FALSE}
 decks_2015 <- tibble(File = files_2015) %>%
-    extract(File, "Player", "([A-Z][a-z]+-[A-Z][a-z]+)", remove = FALSE) %>%
+    extract(File, "Player", "(^-.*'$)", remove = FALSE) %>%
     mutate(Data = map(File, deckify)) %>%
     unnest(Data) %>%
     select(-File)
 
 decks_2016 <- tibble(File = files_2016) %>%
-    extract(File, "Player", "([A-Z][a-z]+-[A-Z][a-z]+)", remove = FALSE) %>%
+    extract(File, "Player", "(^-.*_$)", remove = FALSE) %>%
     mutate(Data = map(File, deckify)) %>%
     unnest(Data) %>%
     select(-File)
 
 decks_2017 <- tibble(File = files_2017) %>%
-    extract(File, "Player", "([A-Z][a-z]+-[A-Z][a-z]+)", remove = FALSE) %>%
+    extract(File, "Player", "([A-Z][a-z]+,[A-Z][a-z]+)", remove = FALSE) %>%
     mutate(Data = map(File, deckify)) %>%
     unnest(Data) %>%
     select(-File)
 
 decks_2018 <- tibble(File = files_2018) %>%
-    extract(File, "Player", "([A-Z][a-z]+-[A-Z][a-z]+)", remove = FALSE) %>%
+    extract(File, "Player", "([A-Z][a-z]+,[A-Z][a-z]+)", remove = FALSE) %>%
     mutate(Data = map(File, deckify)) %>%
     unnest(Data) %>%
     select(-File)
@@ -80,7 +80,39 @@ decks_2020 <- tibble(File = files_2020) %>%
     mutate(Data = map(File, deckify)) %>%
     unnest(Data) %>%
     select(-File)
+```
 
+```{r}
+decks_2015 %>% 
+  head(150) %>% 
+  glimpse()
+
+decks_2016 %>% 
+  head(150) %>% 
+  glimpse()
+
+decks_2017 %>% 
+  head(150) %>% 
+  glimpse()
+
+decks_2018 %>% 
+  head(150) %>% 
+  glimpse()
+
+decks_2020 %>% 
+  head(150) %>% 
+  glimpse()
+```
+
+```{r}
+View(decks_2015)
+View(decks_2016)
+View(decks_2017)
+View(decks_2018)
 View(decks_2020)
 ```
 
+Updates: I have been cleaning the data for years 2015-2018, finding regexes to
+extract their filenames for the table, and creating the tibbles for each year,
+to be joined altogether soon. I have also read in my master tibble of all
+magic cards, so my data is 80% read in at this point.
