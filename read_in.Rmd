@@ -6,12 +6,15 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, options(scipen=999))
 
 library(httr)
 library(jsonlite)
+library(ggthemes)
 library(tidyverse)
 ```
+
+Link to GitHub Repository: https://github.com/Juggereggnog/final_project_v1
 
 ```{r read, include=FALSE}
 mtgjson <- read_csv("raw-data/AllPrintingsCSVFiles.tar.bz2")
@@ -93,9 +96,7 @@ decks_2020 <- tibble(File = files_2020) %>%
     select(-File)
 
 decks <- rbind(decks_2015, decks_2016, decks_2017, decks_2018, decks_2020) %>% 
-  unnest(player)
-
-decks <- decks %>% 
+  unnest(player) %>% 
   mutate(player = recode(player, "Damo da Rosa" = "Paulo Vitor Damo da Rosa",
                                  "Paulo Rosa" = "Paulo Vitor Damo da Rosa",
                                  "Paulo Vitor" = "Paulo Vitor Damo da Rosa",
@@ -268,8 +269,32 @@ decks <- decks %>%
                    (year == 2020 & player == "Matias Leveratto") ~ 12500,
            TRUE ~ 9999999)
 )
+
+decks$duplicates <- as.numeric(decks$duplicates)
+
+decks$gatherer_id <- as.numeric(decks$gatherer_id)
 ```
 
-```{r view}
-View(decks)
+```{r graph}
+ggdecks <- decks %>% 
+  group_by(player, winnings_dollars) %>% 
+  summarize() %>% 
+  ungroup() %>% 
+  group_by(player) %>% 
+  summarize(total_winnings = sum(winnings_dollars)) %>% 
+  arrange(desc(total_winnings)) %>% 
+  head(10)
+
+ggplot(ggdecks, aes(fct_reorder(player, total_winnings), total_winnings)) +
+  geom_col() +
+  coord_flip() +
+  labs(title = "Lifetime Winnings of Magic World Championship Players 2015-2020",
+       subtitle = "Damo da Rosa is considered one of the best players of all time;
+highest earners are skewed towards recent years due to higher prize pools",
+       caption = "Source: Wizards of the Coast Event Coverage") +
+  xlab("Player") +
+  ylab("Total Winnings ($)") +
+  theme_bw() +
+  theme(axis.text.y = element_text(angle = 40))
 ```
+
