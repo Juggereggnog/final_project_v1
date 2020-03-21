@@ -101,7 +101,91 @@ decks <- decks %>%
                                  "Paulo Vitor" = "Paulo Vitor Damo da Rosa",
                                  "Brian Duin" = "Brian Braun-Duin",
                                  "Josh Leyton" = "Josh Utter-Leyton",
-                                 "Jean Emmanuel" = "Jean Emmanuel Depraz"))
+                                 "Jean Emmanuel" = "Jean Emmanuel Depraz"),
+         ranking = case_when(
+           (year == 2015 & player == "Seth Manfield") | 
+             (year == 2016 & player == "Brian Braun-Duin") | 
+             (year == 2017 & player == "William Jensen") | 
+             (year == 2018 & player == "Javier Dominguez") | 
+             (year == 2020 & player == "Paulo Vitor Damo da Rosa") ~ 1,
+           (year == 2015 & player == "Owen Turtenwald") | 
+             (year == 2016 & player == "Marcio Carvalho") | 
+             (year == 2017 & player == "Javier Dominguez") | 
+             (year == 2018 & player == "Grezgorz Kowalski") | 
+             (year == 2020 & player == "Marcio Carvalho") ~ 2,
+           (year == 2015 & player == "Paul Rietzl") | 
+             (year == 2016 & player == "Oliver Tiu") | 
+             (year == 2017 & player == "Josh Utter-Leyton") | 
+             (year == 2018 & player == "Ben Stark") | 
+             (year == 2020 & player == "Seth Manfield	") ~ 3,
+           (year == 2015 & player == "Samuel Black") | 
+             (year == 2016 & player == "Shota Yasooka") | 
+             (year == 2017 & player == "Kelvin Chew") | 
+             (year == 2018 & player == "Shahar Shenhar") | 
+             (year == 2020 & player == "Gabriel Nassif") ~ 4,
+           (year == 2015 & player == "Magnus Lantto") | 
+             (year == 2016 & player == "Lukas Blohon") | 
+             (year == 2017 & player == "Reid Duke") | 
+             (year == 2018 & player == "Allen Wu") | 
+             (year == 2020 & player == "Sebastian Pozzo") ~ 5,
+           (year == 2015 & player == "Martin Muller") | 
+             (year == 2016 & player == "Luis Scott-Vargas") | 
+             (year == 2017 & player == "Samuel Black") | 
+             (year == 2018 & player == "Wyatt Darby") | 
+             (year == 2020 & player == "Eli Loveman") ~ 6,
+           (year == 2015 & player == "Shaun McLaren") | 
+             (year == 2016 & player == "Jiachen Tao") | 
+             (year == 2017 & player == "Seth Manfield") | 
+             (year == 2018 & player == "Matthew Nass") | 
+             (year == 2020 & player == "Jean-Emmanuel Depraz") ~ 7,
+           (year == 2015 & player == "Thiago Saporito") | 
+             (year == 2016 & player == "Seth Manfield") | 
+             (year == 2017 & player == "Owen Turtenwald") | 
+             (year == 2018 & player == "Ben Hull") | 
+             (year == 2020 & player == "Autumn Burchett") ~ 8,
+           (year == 2015 & player == "Ondrej Strasky") | 
+             (year == 2016 & player == "Thiago Saporito") | 
+             (year == 2017 & player == "Gerry Thompson") | 
+             (year == 2018 & player == "Reid Duke") | 
+             (year == 2020 & player == "Piotr Glogowski") ~ 9,
+           (year == 2015 & player == "Yuuya Watanabe") | 
+             (year == 2016 & player == "Steve Rubin") | 
+             (year == 2017 & player == "Shota Yasooka") | 
+             (year == 2018 & player == "Mike Sigrist") | 
+             (year == 2020 & player == "Chris Kvartek") ~ 10,
+           (year == 2015 & player == "Paulo Vitor Damo da Rosa") | 
+             (year == 2016 & player == "Mike Sigrist") | 
+             (year == 2017 & player == "Christian Calcano") | 
+             (year == 2018 & player == "John Rolf") | 
+             (year == 2020 & player == "Raphael Levy") ~ 11,
+           (year == 2015 & player == "Jacob Wilson") | 
+             (year == 2016 & player == "Reid Duke") | 
+             (year == 2017 & player == "Paulo Vitor Damo da Rosa") | 
+             (year == 2018 & player == "Marcio Carvalho") | 
+             (year == 2020 & player == "Thoralf Severin") ~ 12,
+           (year == 2015 & player == "Joel Larsson") | 
+             (year == 2016 & player == "Brad Nelson") | 
+             (year == 2017 & player == "Eric Froehlich") | 
+             (year == 2018 & player == "Brad Nelson") | 
+             (year == 2020 & player == "Ondrej Strasky") ~ 13,
+           (year == 2015 & player == "Alexander Hayne") | 
+             (year == 2016 & player == "Joel Larsson") | 
+             (year == 2017 & player == "Sebastian Pozzo") | 
+             (year == 2018 & player == "Elias Watsfeldt") | 
+             (year == 2020 & player == "Javier Dominguez") ~ 14,
+           (year == 2015 & player == "Martin Dang") | 
+             (year == 2016 & player == "Paulo Vitor Damo da Rosa") | 
+             (year == 2017 & player == "Brad Nelson") | 
+             (year == 2018 & player == "Brian Braun-Duin") | 
+             (year == 2020 & player == "Andrea Mengucci") ~ 15,
+           (year == 2015 & player == "Steve Rubin") | 
+             (year == 2016 & player == "Yuuya Watanabe") | 
+             (year == 2017 & player == "Martin Juza") | 
+             (year == 2018 & player == "Luis Salvatto") | 
+             (year == 2020 & player == "Matias Leveratto") ~ 16,
+           TRUE ~ 9999999
+         )
+)
 ```
 
 ```{r view}
