@@ -17,7 +17,13 @@ library(tidyverse)
 Link to GitHub Repository: https://github.com/Juggereggnog/final_project_v1
 
 ```{r read, include=FALSE}
-mtgjson <- read_csv("raw-data/AllPrintingsCSVFiles.tar.bz2")
+cards <- read_csv("AllPrintingsCSVFiles/cards.csv")
+
+prices <- read_csv("AllPrintingsCSVFiles/prices.csv")
+
+sets <- read_csv("AllPrintingsCSVFiles/sets.csv")
+
+tokens <- read_csv("AllPrintingsCSVFiles/tokens.csv")
 ```
 
 ```{r functions, include=FALSE}
@@ -297,4 +303,3 @@ highest earners are skewed towards recent years due to higher prize pools",
   theme_bw() +
   theme(axis.text.y = element_text(angle = 40))
 ```
-
