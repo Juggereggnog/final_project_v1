@@ -309,7 +309,7 @@ ggdecks <- decks %>%
 earnings <- ggplot(ggdecks, aes(fct_reorder(player, total_winnings), total_winnings)) +
   geom_col() +
   coord_flip() +
-  labs(title = "Lifetime Winnings of Magic World Championship Players 2015-2020",
+  labs(title = "Total Earnings of Magic World Championship Players 2015-2020",
        subtitle = "Damo da Rosa is considered one of the best players of all time;
 highest earners are skewed towards recent years due to higher prize pools",
        caption = "Source: Wizards of the Coast Event Coverage") +

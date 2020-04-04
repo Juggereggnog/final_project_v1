@@ -9,7 +9,11 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                  
                  titlePanel("Model"),
                  
-                 h3("Breaking Down Tournament Decks")
+                 h3("Breaking Down Tournament Decks and Players"),
+                 
+                 mainPanel(
+                     plotOutput("earnings")
+                 )
         ),
         
             tabPanel("Discussion",
@@ -35,7 +39,13 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
 
 server <- function(input, output) {
 
-    
+    output$earnings <- renderImage({
+        list(src = "earnings.png",
+             contentType = "image/png",
+             width = 800,
+             height = 800,
+             alt = "This is alternate text")
+    }, deleteFile = FALSE)
 }
 
 # Run the application
