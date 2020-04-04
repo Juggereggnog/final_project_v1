@@ -16,14 +16,29 @@ library(tidyverse)
 
 Link to GitHub Repository: https://github.com/Juggereggnog/final_project_v1
 
-```{r read, include=FALSE}
-cards <- read_csv("AllPrintingsCSVFiles/cards.csv")
+```{r}
+cards <- read_csv("AllPrintingsCSVFiles/cards.csv", guess_max = 200000)
 
-prices <- read_csv("AllPrintingsCSVFiles/prices.csv")
+prices <- read_csv("AllPrintingsCSVFiles/prices.csv") %>% 
+  filter(type == "paper") %>% 
+  select(price, uuid)
 
-sets <- read_csv("AllPrintingsCSVFiles/sets.csv")
+sets <- read_csv("AllPrintingsCSVFiles/sets.csv") %>% 
+  select(-index, -id)
+```
 
-tokens <- read_csv("AllPrintingsCSVFiles/tokens.csv")
+```{r}
+full_table <- cards %>% 
+  left_join(sets, by = c("setCode" = "code"), suffix = c("_card", "_set")) %>% 
+  left_join(prices, by = "uuid") %>% 
+  filter(baseSetSize != 0,
+         ! type_set %in% c("masters", "promo"),
+         ! is.na(as.numeric(number))) %>% 
+  select(index, id, price, name_card, names, power, toughness, loyalty,
+         convertedManaCost, manaCost, colors, colorIdentity, supertypes, types,
+         subtypes, rarity, text, layout, name_set, mcmName, setCode, releaseDate,
+         type_set, baseSetSize, totalSetSize, block, parentCode, printings,
+         number, borderColor, edhrecRank, multiverseId)
 ```
 
 ```{r functions, include=FALSE}
@@ -291,7 +306,7 @@ ggdecks <- decks %>%
   arrange(desc(total_winnings)) %>% 
   head(10)
 
-ggplot(ggdecks, aes(fct_reorder(player, total_winnings), total_winnings)) +
+earnings <- ggplot(ggdecks, aes(fct_reorder(player, total_winnings), total_winnings)) +
   geom_col() +
   coord_flip() +
   labs(title = "Lifetime Winnings of Magic World Championship Players 2015-2020",
@@ -302,4 +317,10 @@ highest earners are skewed towards recent years due to higher prize pools",
   ylab("Total Winnings ($)") +
   theme_bw() +
   theme(axis.text.y = element_text(angle = 40))
+```
+
+```{r ggsave, include=FALSE}
+ggsave("earnings.png",
+       plot = earnings,
+       path = "shiny_magic")
 ```
