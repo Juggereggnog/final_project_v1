@@ -11,6 +11,10 @@ knitr::opts_chunk$set(echo = FALSE, options(scipen=999))
 library(httr)
 library(jsonlite)
 library(ggthemes)
+library(infer)
+library(skimr)
+library(broom)
+library(gganimate)
 library(rsconnect)
 library(tidyverse)
 ```
@@ -33,8 +37,12 @@ full_table <- cards %>%
   left_join(sets, by = c("setCode" = "code"), suffix = c("_card", "_set")) %>% 
   left_join(prices, by = "uuid") %>% 
   filter(baseSetSize != 0,
-         ! type_set %in% c("masters", "promo"),
+         ! type_set %in% c("masters", "promo", "funny"),
          ! is.na(as.numeric(number))) %>% 
+  distinct(name_card, .keep_all = TRUE) %>% 
+  mutate(power = ifelse(power < 0, 0, as.numeric(power)),
+         toughness = ifelse(toughness < 0, 0, as.numeric(toughness)),
+         loyalty = as.numeric(loyalty)) %>% 
   select(index, id, price, name_card, names, power, toughness, loyalty,
          convertedManaCost, manaCost, colors, colorIdentity, supertypes, types,
          subtypes, rarity, text, layout, name_set, mcmName, setCode, releaseDate,
@@ -49,7 +57,9 @@ deckify <- function(data) {
            from_set = substr(str_extract(X1, "\\(.*?\\)"), 2, 4),
            gatherer_id = substr(str_extract(X1, "\\) \\d{0,6}"),
                                  2, nchar(X1)),
-           card_name = substr(X1, nchar(duplicates) + 2, nchar(X1) - nchar(from_set) - nchar(gatherer_id) - 3),
+           card_name = substr(X1,
+                              nchar(duplicates) + 2,
+                              nchar(X1) - nchar(from_set) - nchar(gatherer_id) - 3),
            X1 = NULL)
 }
 
@@ -307,7 +317,9 @@ ggdecks <- decks %>%
   arrange(desc(total_winnings)) %>% 
   head(10)
 
-earnings <- ggplot(ggdecks, aes(fct_reorder(player, total_winnings), total_winnings)) +
+earnings <- ggplot(ggdecks,
+                   aes(fct_reorder(player, total_winnings),
+                       total_winnings)) +
   geom_col() +
   coord_flip() +
   labs(title = "Total Earnings of Magic World Championship Players 2015-2020",
@@ -325,3 +337,49 @@ ggsave("earnings.png",
        plot = earnings,
        path = "shiny_magic")
 ```
+
+```{r}
+copy_full_table <- full_table %>% 
+  mutate(in_tournament = ifelse(name_card %in% decks$card_name, 1, 0))
+  
+
+View(copy_full_table)
+```
+
+
+
+```{r}
+
+# Change power, toughness, etc to numeric instead of character (get rid of
+# stars)
+
+# full_table %>% 
+#   select(power, price, toughness) %>% 
+#   cor()
+
+ggplot(full_table, aes(rarity)) + 
+  geom_bar()
+
+rare_model <- lm(price ~ rarity, data = full_table)
+
+# CART classification, tree for determining if card was in tournament
+# usually a predictive model (with categorical outcomes)
+
+# regression is more of an explanatory model
+
+# price ~ rarity, price ~ power + toughness + 
+
+rare_model %>% 
+  tidy(conf.int = TRUE) %>% 
+  select(term, estimate, conf.low, conf.high)
+```
+
+
+
+
+
+
+
+
+
+
