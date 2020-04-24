@@ -1,0 +1,59 @@
+# The About Page
+
+### What Is *Magic: The Gathering*?
+
+*Magic: The Gathering* was the first collectible trading card game ever made,
+created by Wizards of the Coast in 1993. It has received regular expansions to
+its collection of cards for over 25 years, and is played in both physical and
+digital formats.
+
+Two players construct a deck of 60 cards full of creatures, lands, artifacts,
+and more and battle against each other to bring their opponent's life total
+from 20 to 0. With over 20,000 unique cards, the possibilities are daunting,
+trying to find the best combination of cards. The players who are able to find
+these combinations, and play them optimally, will eventually be invited to
+*Magic's* premier tournament: the *Magic* World Championship.
+
+What I seek to do with this project is understand what goes into a top-tier
+*Magic* deck, and, because it is a "collectible" card game with a thriving
+marketplace, find out the total cost of the cards that comprise the deck. Many
+games these days are accused of being "play-to-win," where those who can afford
+to buy the best cards are destined to win. But what is the cost of victory? And
+how does victory affect the cost of the cards? Read on!
+
+
+
+### Data Sources
+
+I used up-to-date data from a website called [MTGJSON](https://mtgjson.com/),
+which aptly provides card and price data in .json format. In addition, I
+scraped the decks of the top 16 players for each World Championship from
+2015-2020. That data and similar data from other tournaments can be found on
+[*Magic's* official website](https://magic.wizards.com/en/events/coverage?source=MX_Nav2020).
+
+
+
+### Plans for Processing Data
+
+As can be seen on [my GitHub repo](https://github.com/Juggereggnog/final_project_v1),
+the decks from each player is currently a .txt file, which I plan on converting
+into .csv files over the weekend. After creating the various tibbles, I intend
+to join them all to create one large tibble of all decks that ranked in the top
+16 of a *Magic* World Championship. As for the .json file, MTGJSON would not let
+me download it from the link, instead opting to show the file in the web
+browser, crashing due to the sheer amount of text. I am now downloading it as
+a .csv / .bz2 file and am reading R documentation on reading it in, which should
+also be completed early in the weekend. Once reading it in, I intend on doing
+a left-joining the "MTGJSON" tibble to the "top 16" tibble, and going from
+there.
+
+
+
+### About The Creator
+
+Elias DeLeon is currently an undergraduate at Harvard University, studying
+philosophy and government, and computer science, and any other subject he can
+get his mind on.
+
+You can contact me at eliasdeleon@college.harvard.edu or view my other
+projects on my [GitHub](https://github.com/Juggereggnog).
