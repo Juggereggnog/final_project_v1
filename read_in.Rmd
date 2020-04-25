@@ -21,35 +21,6 @@ library(tidyverse)
 
 Link to GitHub Repository: https://github.com/Juggereggnog/final_project_v1
 
-```{r}
-cards <- read_csv("AllPrintingsCSVFiles/cards.csv", guess_max = 200000)
-
-prices <- read_csv("AllPrintingsCSVFiles/prices.csv") %>% 
-  filter(type == "paper") %>% 
-  select(price, uuid)
-
-sets <- read_csv("AllPrintingsCSVFiles/sets.csv") %>% 
-  select(-index, -id)
-```
-
-```{r}
-full_table <- cards %>% 
-  left_join(sets, by = c("setCode" = "code"), suffix = c("_card", "_set")) %>% 
-  left_join(prices, by = "uuid") %>% 
-  filter(baseSetSize != 0,
-         ! type_set %in% c("masters", "promo", "funny"),
-         ! is.na(as.numeric(number))) %>% 
-  distinct(name_card, .keep_all = TRUE) %>% 
-  mutate(power = ifelse(power < 0, 0, as.numeric(power)),
-         toughness = ifelse(toughness < 0, 0, as.numeric(toughness)),
-         loyalty = as.numeric(loyalty)) %>% 
-  select(index, id, price, name_card, names, power, toughness, loyalty,
-         convertedManaCost, manaCost, colors, colorIdentity, supertypes, types,
-         subtypes, rarity, text, layout, name_set, mcmName, setCode, releaseDate,
-         type_set, baseSetSize, totalSetSize, block, parentCode, printings,
-         number, borderColor, edhrecRank, multiverseId)
-```
-
 ```{r functions, include=FALSE}
 deckify <- function(data) {
   sample_deck <- read_delim(data, delim = "\n", col_names = FALSE) %>% 
@@ -58,8 +29,9 @@ deckify <- function(data) {
            gatherer_id = substr(str_extract(X1, "\\) \\d{0,6}"),
                                  2, nchar(X1)),
            card_name = substr(X1,
-                              nchar(duplicates) + 2,
-                              nchar(X1) - nchar(from_set) - nchar(gatherer_id) - 3),
+                              nchar(duplicates) + 2, nchar(X1) 
+                                                   - nchar(from_set) 
+                                                   - nchar(gatherer_id) - 3),
            X1 = NULL)
 }
 
@@ -283,7 +255,8 @@ decks <- rbind(decks_2015, decks_2016, decks_2017, decks_2018, decks_2020) %>%
                  (year == 2018 & player == "Elias Watsfeldt") ~ 5000,
                  (year == 2018 & player == "Brian Braun-Duin") ~ 5000,
                  (year == 2018 & player == "Luis Salvatto") ~ 5000,
-                   (year == 2020 & player == "Paulo Vitor Damo da Rosa") ~ 300000,
+                   (year == 2020 & player == "Paulo Vitor Damo da Rosa") 
+                                                                ~ 300000,
                    (year == 2020 & player == "Marcio Carvalho") ~ 150000,
                    (year == 2020 & player == "Seth Manfield") ~ 100000,
                    (year == 2020 & player == "Gabriel Nassif") ~ 75000,
@@ -299,13 +272,176 @@ decks <- rbind(decks_2015, decks_2016, decks_2017, decks_2018, decks_2020) %>%
                    (year == 2020 & player == "Javier Dominguez") ~ 12500,
                    (year == 2020 & player == "Andrea Mengucci") ~ 12500,
                    (year == 2020 & player == "Matias Leveratto") ~ 12500,
-           TRUE ~ 9999999)) %>% 
+           TRUE ~ 9999999),
+         card_name = map(card_name,
+                         ~ ifelse(str_detect(., " $") == TRUE,
+                                  substr(.,
+                                         start = 1,
+                                         stop = nchar(.) - 1), .)),
+         card_name = map(card_name,
+                         ~ ifelse(str_detect(., "//") == TRUE,
+                                  str_split(., " // "), .)),
+         card_name = map(card_name, ~ unlist(.)[1])) %>% 
+  unnest(card_name) %>% 
   select(-gatherer_id, -from_set)
 
 decks$duplicates <- as.numeric(decks$duplicates)
+
+split_cards <- decks %>% 
+  filter(str_detect(decks$card_name, "//") == TRUE) %>% 
+  distinct(card_name) %>%  
+  separate(card_name, into = c("first", "second"), sep = " // ")
 ```
 
-```{r graph}
+```{r mtgjson}
+cards <- read_csv("AllPrintingsCSVFiles/cards.csv",
+                  guess_max = 200000,
+                  col_types = cols(
+                    index = col_double(),
+                    id = col_double(),
+                    artist = col_character(),
+                    borderColor = col_character(),
+                    colorIdentity = col_character(),
+                    colorIndicator = col_character(),
+                    colors = col_character(),
+                    convertedManaCost = col_double(),
+                    duelDeck = col_character(),
+                    edhrecRank = col_double(),
+                    faceConvertedManaCost = col_double(),
+                    flavorText = col_character(),
+                    frameEffect = col_character(),
+                    frameEffects = col_character(),
+                    frameVersion = col_character(),
+                    hand = col_double(),
+                    hasFoil = col_double(),
+                    hasNoDeckLimit = col_double(),
+                    hasNonFoil = col_double(),
+                    isAlternative = col_double(),
+                    isArena = col_double(),
+                    isBuyABox = col_double(),
+                    isDateStamped = col_double(),
+                    isFullArt = col_double(),
+                    isMtgo = col_double(),
+                    isOnlineOnly = col_double(),
+                    isOversized = col_double(),
+                    isPaper = col_double(),
+                    isPromo = col_double(),
+                    isReprint = col_double(),
+                    isReserved = col_double(),
+                    isStarter = col_double(),
+                    isStorySpotlight = col_double(),
+                    isTextless = col_double(),
+                    isTimeshifted = col_double(),
+                    layout = col_character(),
+                    leadershipSkills = col_character(),
+                    life = col_double(),
+                    loyalty = col_character(),
+                    manaCost = col_character(),
+                    mcmId = col_double(),
+                    mcmMetaId = col_double(),
+                    mtgArenaId = col_double(),
+                    mtgoFoilId = col_double(),
+                    mtgoId = col_double(),
+                    multiverseId = col_double(),
+                    name = col_character(),
+                    names = col_character(),
+                    number = col_character(),
+                    originalText = col_character(),
+                    originalType = col_character(),
+                    otherFaceIds = col_character(),
+                    power = col_character(),
+                    printings = col_character(),
+                    purchaseUrls = col_character(),
+                    rarity = col_character(),
+                    scryfallId = col_character(),
+                    scryfallIllustrationId = col_character(),
+                    scryfallOracleId = col_character(),
+                    setCode = col_character(),
+                    side = col_character(),
+                    subtypes = col_character(),
+                    supertypes = col_character(),
+                    tcgplayerProductId = col_double(),
+                    text = col_character(),
+                    toughness = col_character(),
+                    type = col_character(),
+                    types = col_character(),
+                    uuid = col_character(),
+                    variations = col_character(),
+                    watermark = col_character()
+                  ))
+
+prices <- read_csv("AllPrintingsCSVFiles/prices.csv",
+                   col_types = cols(
+                     index = col_double(),
+                     id = col_double(),
+                     date = col_date(format = ""),
+                     price = col_double(),
+                     type = col_character(),
+                     uuid = col_character()
+                   )) %>% 
+  filter(type == "paper") %>% 
+  select(price, uuid)
+
+sets <- read_csv("AllPrintingsCSVFiles/sets.csv",
+                 col_types = cols(
+                   index = col_double(),
+                   id = col_double(),
+                   baseSetSize = col_double(),
+                   block = col_character(),
+                   boosterV3 = col_character(),
+                   code = col_character(),
+                   codeV3 = col_character(),
+                   isFoilOnly = col_double(),
+                   isForeignOnly = col_double(),
+                   isOnlineOnly = col_double(),
+                   isPartialPreview = col_double(),
+                   keyruneCode = col_character(),
+                   mcmId = col_double(),
+                   mcmName = col_character(),
+                   meta = col_character(),
+                   mtgoCode = col_character(),
+                   name = col_character(),
+                   parentCode = col_character(),
+                   releaseDate = col_date(format = ""),
+                   tcgplayerGroupId = col_double(),
+                   totalSetSize = col_double(),
+                   type = col_character()
+                 )) %>% 
+  select(-index, -id)
+```
+
+```{r joining_tables, warning=FALSE}
+full_table <- cards %>% 
+  left_join(sets, by = c("setCode" = "code"), suffix = c("_card", "_set")) %>% 
+  left_join(prices, by = "uuid") %>% 
+  filter(baseSetSize != 0,
+         ! type_set %in% c("masters", "promo", "funny"),
+         ! is.na(as.numeric(number))) %>% 
+  distinct(name_card, .keep_all = TRUE) %>% 
+  mutate(power = ifelse(power < 0, 0, as.numeric(power)),
+         toughness = ifelse(toughness < 0, 0, as.numeric(toughness)),
+         loyalty = as.numeric(loyalty),
+         in_tournament = ifelse(name_card %in% decks$card_name |
+                                paste0(name_card, " ") %in% decks$card_name |
+                                name_card %in% split_cards$first, 1, 0)) %>% 
+  select(index, id, price, name_card, names, power, toughness, loyalty,
+         convertedManaCost, manaCost, colors, colorIdentity, supertypes, types,
+         subtypes, rarity, text, layout, name_set, mcmName, setCode,
+         releaseDate, type_set, baseSetSize, totalSetSize, block, parentCode,
+         printings, number, borderColor, edhrecRank, multiverseId,
+         in_tournament)
+```
+
+```{r decks_addendum}
+tournament_cards <- full_table %>% 
+  filter(in_tournament == 1)
+
+decks_full_table <- decks %>% 
+  inner_join(tournament_cards, by = c("card_name" = "name_card")) %>% 
+  select(-in_tournament)
+```
+
+```{r graph_earnings}
 ggdecks <- decks %>% 
   group_by(player, winnings_dollars) %>% 
   summarize() %>% 
@@ -316,8 +452,7 @@ ggdecks <- decks %>%
   head(10)
 
 earnings <- ggplot(ggdecks,
-                   aes(fct_reorder(player, total_winnings),
-                       total_winnings)) +
+                   aes(fct_reorder(player, total_winnings), total_winnings)) +
   geom_col() +
   coord_flip() +
   labs(title = "Total Earnings of Magic World Championship Players 2015-2020",
@@ -336,47 +471,7 @@ ggsave("earnings.png",
        path = "shiny_magic")
 ```
 
-```{r}
-
-split_cards <- decks %>% 
-  filter(str_detect(decks$card_name, "//") == TRUE) %>% 
-  distinct(card_name) %>%  
-  separate(card_name, into = c("first", "second"), sep = " // ")
-
-copy_full_table <- full_table %>% 
-  mutate(in_tournament = ifelse(name_card %in% decks$card_name |
-                                paste0(name_card, " ") %in% decks$card_name |
-                                name_card %in% split_cards$first, 1, 0))
-  
-decks_full_table <- copy_full_table %>% 
-  filter(in_tournament == 1)
-
-# decks2 <- decks %>%
-#   mutate(card_name = map(card_name, ~ ifelse(str_detect(., " $") == TRUE, substr(., start = 1, stop = nchar(.) - 1), .)),
-#          card_name = ifelse(str_detect(card_name, "//") == TRUE, str_split(card_name, " // "), card_name),
-#          card_name = map(card_name, ~ unlist(.)[1])) %>%
-#   unnest(card_name)
-
-decks2 <- decks %>%
-  mutate(card_name = map(card_name, ~ ifelse(str_detect(., " $") == TRUE, substr(., start = 1, stop = nchar(.) - 1), .)),
-         card_name = map(card_name, ~ ifelse(str_detect(., "//") == TRUE, str_split(., " // "), .)),
-         card_name = map(card_name, ~ unlist(.)[1])) %>%
-  unnest(card_name)
-
-# decks %>% filter(str_detect(card_name, " $") == TRUE) %>% pull(card_name) %>% substr(start = 1, stop = nchar(.) - 1)
-
-# decks2 %>% filter(str_detect(decks2$card_name, " $") == TRUE)
-
-# decks2$card_name %>% tail(100)
-
-god <- decks2 %>% 
-  inner_join(decks_full_table, by = c("card_name" = "name_card")) %>% 
-  select(-in_tournament)
-```
-
-
-
-```{r}
+```{r graphs_test}
 
 # Change power, toughness, etc to numeric instead of character (get rid of
 # stars)
@@ -401,13 +496,3 @@ rare_model %>%
   tidy(conf.int = TRUE) %>% 
   select(term, estimate, conf.low, conf.high)
 ```
-
-
-
-
-
-
-
-
-
-
