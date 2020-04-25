@@ -8,15 +8,15 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, options(scipen=999))
 
-library(httr)
-library(jsonlite)
-library(ggthemes)
-library(infer)
-library(skimr)
-library(broom)
-library(gganimate)
-library(rsconnect)
-library(tidyverse)
+library(lubridate) # "Working with dates" package
+library(infer) # "Statistical analysis" package
+library(skimr) # "Fancy summary" package
+library(broom) # "Tidy lm" package
+library(gganimate) # "Animated graphs" package
+library(rsconnect) # "Shiny app upload" package
+library(tidymodels) # "Uniform regression / fit functions" package
+library(rpart.plot) # "Grpahing CART trees" package
+library(tidyverse) # "The" package
 ```
 
 Link to GitHub Repository: https://github.com/Juggereggnog/final_project_v1
@@ -418,8 +418,10 @@ full_table <- cards %>%
          ! type_set %in% c("masters", "promo", "funny"),
          ! is.na(as.numeric(number))) %>% 
   distinct(name_card, .keep_all = TRUE) %>% 
-  mutate(power = ifelse(power < 0, 0, as.numeric(power)),
-         toughness = ifelse(toughness < 0, 0, as.numeric(toughness)),
+  mutate(power = ifelse(power > 0, as.numeric(power), 0),
+         power = ifelse(is.na(power) & types == "Creature", 0, power),
+         toughness = ifelse(toughness > 0, as.numeric(toughness), 0),
+         toughness = ifelse(is.na(toughness) & types == "Creature", 0, power),
          loyalty = as.numeric(loyalty),
          in_tournament = ifelse(name_card %in% decks$card_name |
                                 paste0(name_card, " ") %in% decks$card_name |
@@ -438,7 +440,7 @@ tournament_cards <- full_table %>%
 
 decks_full_table <- decks %>% 
   inner_join(tournament_cards, by = c("card_name" = "name_card")) %>% 
-  select(-in_tournament)
+  select(-in_tournament, -index, -id)
 ```
 
 ```{r graph_earnings}
@@ -463,36 +465,77 @@ highest earners are skewed towards recent years due to higher prize pools",
   ylab("Total Winnings ($)") +
   theme_bw() +
   theme(axis.text.y = element_text(angle = 40))
-```
 
-```{r ggsave, include=FALSE}
 ggsave("earnings.png",
        plot = earnings,
        path = "shiny_magic")
 ```
 
 ```{r graphs_test}
+full_table %>% 
+  select(power, price, toughness) %>% 
+  filter(! is.na(power), ! is.na(price), ! is.na(toughness)) %>% 
+  cor()
 
-# Change power, toughness, etc to numeric instead of character (get rid of
-# stars)
 
-# full_table %>% 
-#   select(power, price, toughness) %>% 
-#   cor()
-
-ggplot(full_table, aes(rarity)) + 
+ggplot(full_table, aes(rarity)) +
   geom_bar()
 
+
+ggplot(full_table, aes(toughness, price, color = rarity)) +
+  geom_point() +
+  geom_jitter(alpha = 0.4) +
+  labs(y = "Price") +
+  scale_y_continuous(limits = c(0, 1000))
+
+
 rare_model <- lm(price ~ rarity, data = full_table)
+
+rare_model %>% 
+  tidy(conf.int = TRUE) %>% 
+  select(term, estimate, conf.low, conf.high)
+
+
+tournament_model <- lm(price ~ in_tournament, data = full_table)
+
+tournament_model %>% 
+  tidy(conf.int = TRUE) %>% 
+  select(term, estimate, conf.low, conf.high)
+
+
+stats_model <- lm(price ~ power + toughness + rarity + in_tournament +
+                          types + colors + convertedManaCost + name_set +
+                          edhrecRank,
+                  data = full_table)
+
+stats_model %>% 
+  tidy(conf.int = TRUE) %>% 
+  select(term, estimate, conf.low, conf.high)
+
+
+# tree_mod <- decision_tree() %>%
+#   set_engine("rpart",
+#              model = TRUE) %>%
+#   set_mode("classification")
+# 
+# tournament_tree <- fit(tree_mod,
+#                   factor(in_tournament) ~ power + toughness,
+#                   data = full_table)
+# 
+# tournament_tree$fit %>% 
+#   prp(extra = 4, varlen = 0, faclen = 0)
 
 # CART classification, tree for determining if card was in tournament
 # usually a predictive model (with categorical outcomes)
 
 # regression is more of an explanatory model
-
-# price ~ rarity, price ~ power + toughness + 
-
-rare_model %>% 
-  tidy(conf.int = TRUE) %>% 
-  select(term, estimate, conf.low, conf.high)
 ```
+
+```{r saving}
+write_rds(full_table, "shiny_magic/full_table.rds")
+
+write_rds(decks_full_table, "shiny_magic/decks_full_table.rds")
+
+write_rds(tournament_cards, "shiny_magic/tournament_cards.rds")
+```
+
