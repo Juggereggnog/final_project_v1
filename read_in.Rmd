@@ -299,12 +299,10 @@ decks <- rbind(decks_2015, decks_2016, decks_2017, decks_2018, decks_2020) %>%
                    (year == 2020 & player == "Javier Dominguez") ~ 12500,
                    (year == 2020 & player == "Andrea Mengucci") ~ 12500,
                    (year == 2020 & player == "Matias Leveratto") ~ 12500,
-           TRUE ~ 9999999)
-)
+           TRUE ~ 9999999)) %>% 
+  select(-gatherer_id, -from_set)
 
 decks$duplicates <- as.numeric(decks$duplicates)
-
-decks$gatherer_id <- as.numeric(decks$gatherer_id)
 ```
 
 ```{r graph}
@@ -339,11 +337,41 @@ ggsave("earnings.png",
 ```
 
 ```{r}
-copy_full_table <- full_table %>% 
-  mutate(in_tournament = ifelse(name_card %in% decks$card_name, 1, 0))
-  
 
-View(copy_full_table)
+split_cards <- decks %>% 
+  filter(str_detect(decks$card_name, "//") == TRUE) %>% 
+  distinct(card_name) %>%  
+  separate(card_name, into = c("first", "second"), sep = " // ")
+
+copy_full_table <- full_table %>% 
+  mutate(in_tournament = ifelse(name_card %in% decks$card_name |
+                                paste0(name_card, " ") %in% decks$card_name |
+                                name_card %in% split_cards$first, 1, 0))
+  
+decks_full_table <- copy_full_table %>% 
+  filter(in_tournament == 1)
+
+# decks2 <- decks %>%
+#   mutate(card_name = map(card_name, ~ ifelse(str_detect(., " $") == TRUE, substr(., start = 1, stop = nchar(.) - 1), .)),
+#          card_name = ifelse(str_detect(card_name, "//") == TRUE, str_split(card_name, " // "), card_name),
+#          card_name = map(card_name, ~ unlist(.)[1])) %>%
+#   unnest(card_name)
+
+decks2 <- decks %>%
+  mutate(card_name = map(card_name, ~ ifelse(str_detect(., " $") == TRUE, substr(., start = 1, stop = nchar(.) - 1), .)),
+         card_name = map(card_name, ~ ifelse(str_detect(., "//") == TRUE, str_split(., " // "), .)),
+         card_name = map(card_name, ~ unlist(.)[1])) %>%
+  unnest(card_name)
+
+# decks %>% filter(str_detect(card_name, " $") == TRUE) %>% pull(card_name) %>% substr(start = 1, stop = nchar(.) - 1)
+
+# decks2 %>% filter(str_detect(decks2$card_name, " $") == TRUE)
+
+# decks2$card_name %>% tail(100)
+
+god <- decks2 %>% 
+  inner_join(decks_full_table, by = c("card_name" = "name_card")) %>% 
+  select(-in_tournament)
 ```
 
 
