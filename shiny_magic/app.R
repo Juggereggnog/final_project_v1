@@ -1,36 +1,137 @@
 library(shiny)
+library(DT)
 library(shinythemes)
+library(ggthemes)
+library(scales)
 library(rmarkdown)
 library(plotly)
 library(tidyverse)
 
-ui <- fluidPage(theme = shinytheme("cyborg"),
+full_table <- read_rds("full_table.rds")
+
+decks_full_table <- read_rds("decks_full_table.rds")
+
+tournament_cards <- read_rds("tournament_cards.rds")
+
+player_names <- unique(decks_full_table$player)
+
+tables <- list("All Cards", "Tournament Cards")
+
+
+ui <- fluidPage(theme = shinytheme("flatly"),
         
-        navbarPage("This is Magic",
+        fluidRow(
+            
+            column(12,
+                   align = "center",
+                   navbarPage("This is Magic",
                     
-            tabPanel("Mode",
+                   
+            tabPanel("Model",
                  
                  titlePanel("Model"),
                  
-                 h3("Breaking Down Tournament Decks and Players"),
+                 h3("Breaking Down Tournament Decks"),
                  
-                 mainPanel(
-                     img(src = "earnings.png",
-                         style = "display: block; margin-left: auto; margin-right: auto",
-                         height = "500vw"),
+                 tabsetPanel(
+                     
+                     tabPanel("Deck Breakdown",
+                              
+                              h3("Deck Breakdowns by Year and Card Type"),
+                              
+                              br(),
+                              
+                         sidebarLayout(
+                             
+                             sidebarPanel(
+                                 
+                                 helpText("Select Player and Card Types to View Deck Breakdown"),
+                                 
+                                 selectInput("player_names_breakdown", h3("Player:"), choices = player_names,
+                                             selected = "Paulo Vitor Damo da Rosa")
+                             ),
+                             
+                             mainPanel(
+                                 
+                                 plotlyOutput("breakdown")
+                             )
+                         )
+                     ),
+                     
+                     tabPanel("Earnings",
+                              
+                              h3("Total Player Earnings 2015-2020"),
+                              
+                              br(),
+                              
+                         sidebarLayout(
+                             
+                             sidebarPanel(
+                                 
+                                 helpText("Select Player to View Career Earnings"),
+                                 
+                                 selectInput("player_names_earnings", h3("Player:"), choices = player_names,
+                                             selected = c("Paulo Vitor Damo da Rosa", "Seth Manfield",
+                                                          "Brian Braun-Duin", "Jean-Emmanuel Depraz"), multiple = TRUE),
+                                 
+                                 p("About the Graph: Damo da Rosa is considered one of the best Magic players of all time;
+                                   highest earners are skewed towards recent years due to higher prize pools")
+                             ),
+                              
+                             mainPanel(
+                                 
+                                 plotOutput("earnings")
+                             )
+                         )
+                     )
                  )
-        ),
+            ),
         
-            tabPanel("Discussion",
+            tabPanel("Explore",
                  
-                 titlePanel("Discussion"),
+                 titlePanel("Explore"),
                  
-                 h3("Further Analysis")
-        ),
-        
-            tabPanel("Takeaways",
+                 h3("Further Analysis"),
                  
-                 titlePanel("Takeaways")
+                 br(),
+                 
+                 tabsetPanel(
+                     
+                     tabPanel("Statistical Analysis",
+                              
+                              h3("Price by Release Date and Rarity"),
+                              
+                              sidebarLayout(
+                                  
+                                  sidebarPanel(
+                                      p("Mythic-rare cards were introduced in the early 2010s, and their price has the smallest associated
+                                        decrease. They are incredibly hard to find, which makes it a likely candidate as a contributor to price.
+                                        That said, it is obvious from this graph that on average, the price of all cards is decreasing over time.
+                                        This is mainly the result of Wizards of the Coast refining their card R&D, where cards no longer overthrow
+                                        the meta with every set as was common in the past. In addition, older cards have been gaining value as both
+                                        antique collectibles and overpowered cards that escaped while Magic was still stabilizing.")
+                                  ),
+                                  
+                                  mainPanel(
+                                      plotlyOutput("rare_regression")
+                                  )
+                              )
+                     ),
+                     
+                     tabPanel("Card Data",
+                              
+                              h3("Poke Around!"),
+                              
+                              br(),
+                              
+                              selectInput("table", h3("Dataset:"), choices = tables,
+                                                  selected = "All Cards"),
+                                  
+                              column(12,
+                                     dataTableOutput("dataset"), style = "overflow-x: scroll;"
+                             )
+                     )
+                 )
         ),
         
             tabPanel("About",
@@ -43,9 +144,9 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                  
                  br(),
                  
-                 h4("What is", tags$em("Magic: The Gathering"), "?"),
+                 h4("What is", em("Magic: The Gathering"), "?"),
                  
-                 p(tags$em("Magic: The Gathering"), "was the first collectible trading card game ever made,
+                 p(em("Magic: The Gathering"), "was the first collectible trading card game ever made,
                     created by Wizards of the Coast in 1993. It has received regular expansions to
                     its collection of cards for over 25 years, and is played in both physical and
                     digital formats."),
@@ -55,10 +156,10 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                     from 20 to 0. With over 20,000 unique cards, the possibilities can be daunting to new players
                     trying to find the best combination of cards. The players who are able to find
                     these combinations, and play them optimally, can be invited to",
-                    tags$em("Magic's"), "premier tournament: the", tags$em("Magic"),"World Championship."),
+                    em("Magic's"), "premier tournament: the", em("Magic"),"World Championship."),
                     
                  p("What I seek to do with this project is understand what goes into a top-tier",
-                    tags$em("Magic's"), "deck, and, because it is a 'collectible' card game with a thriving
+                    em("Magic's"), "deck, and, because it is a 'collectible' card game with a thriving
                     marketplace, find out the total cost of the cards that comprise the deck. Many
                     games these days are accused of being 'play-to-win,' where those who can afford
                     to buy the best cards are destined to win. But what is the cost of victory? And
@@ -84,34 +185,129 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                     "which aptly provides card and price data in .json format as well as a multitude of other file formats.
                     In addition, I scraped the decks of the top 16 players for each World Championship from
                     2015-2020. That data and similar data from other tournaments can be found on
-                    ", a(tags$em("Magic's"), " official website.", href = "https://magic.wizards.com/en/events/coverage?source=MX_Nav2020")),
+                    ", a(em("Magic's"), " official website.", href = "https://magic.wizards.com/en/events/coverage?source=MX_Nav2020")),
+                 
+                 br(),
+                 
+                 h4("Methodological Limitations"),
+                 
+                 tags$ul(
+                     tags$li("Sideboard cards are included in deck breakdowns: sideboard cards deserve less weight in analysis than main board cards"),
+                     tags$li("Textbox is not included in analysis: evergreen keywords may also have a strong effect on price and tournament viability")
+                 ),
+                 
+                 br(),
+                 
+                 h4("Areas for Improvement"),
+                 
+                 tags$ul(
+                     tags$li("Adding card name and textbox to regression plot's hover template (currently ggplotly() is confusing to work with"),
+                     tags$li("Adding 'year' (with 'all') inputs for both graphs in Model tab (especially for earnings plot"),
+                     tags$li("Adding analysis and takeaways for each plot (and, if some already exists, possibly adding more)"),
+                     tags$li("Converting shinytheme to 'cyborg' while keeping data tables in the Explore tab visible (currently unable to)"),
+                     tags$li("Making all header text mythic orange (possible with 'includeCSS()')"),
+                     tags$li("Adding functionality to exploring datasets (selecting columns, etc)"),
+                     tags$li("Commenting all code"),
+                     tags$li("Adding more statistical analysis graphs (tournament viability specifically, but also more concerning price)"),
+                     tags$li("slider input for max price of statistical analysis graph")
+                 ),
+                 
+                 br(),
                  
                  h4("About the Creator"),
                  
-                 p("This project's GitHub repository can be found", a("here.", href = "https://github.com/Juggereggnog/final_project_v1/")),
+                 p("Hi, my name is Elias DeLeon, and I am currently an undergraduate at Harvard University, studying
+                    philosophy and government, and computer science, and any other subject I can
+                    get my hands on."),
+                    
+                 p("You can contact me at eliasdeleon@college.harvard.edu or view my other
+                    projects on my", a("GitHub.", href = "https://github.com/Juggereggnog")),
                  
-                 
+                 p("This project's GitHub repository can be found", a("here.", href = "https://github.com/Juggereggnog/final_project_v1/"))
         )
     )
-)
+)))
 
 server <- function(input, output) {
 
-    output$earnings <- renderImage({
-        list(src = "earnings.png",
-             contentType = "image/png",
-             width = 800,
-             height = 800,
-             alt = "This is alternate text")
-    }, deleteFile = FALSE)
+    output$breakdown <- renderPlotly({
+        breakdown <- decks_full_table %>% 
+            mutate(types = ifelse(str_detect(types, "Creature") == TRUE, "Creature", types)) %>% 
+            filter(player %in% input$player_names_breakdown) %>% 
+            count(year, types, duplicates) %>% 
+            group_by(year, types) %>% 
+            summarize(num_cards = sum(duplicates * n)) %>%
+            ggplot(aes(x = types, y = num_cards, fill = year)) +
+            geom_col() +
+            labs(x = "Types",
+                 y = "Count",
+                 fill = "Player") +
+            theme_bw()
+        
+        ggplotly(breakdown)
+    })
     
-    output$anatomy <- renderImage({
-        list(src = "card_anatomy.jpg",
-             contentType = "image/jpg",
-             width = 500,
-             height = 400,
-             alt = "This is alternate text")
-    }, deleteFile = FALSE)
+    output$earnings <- renderPlot({
+        ggdecks <- decks_full_table %>% 
+            group_by(player, winnings_dollars) %>% 
+            summarize() %>% 
+            ungroup() %>% 
+            group_by(player) %>% 
+            summarize(total_winnings = sum(winnings_dollars)) %>% 
+            filter(player %in% input$player_names_earnings) %>% 
+            arrange(desc(total_winnings))
+        
+        ggplot(ggdecks, aes(fct_reorder(player, total_winnings), total_winnings)) +
+            geom_col() +
+            coord_flip() +
+            labs(x = "Player",
+                 y = "Total Winnings ($)",
+                 caption = "Source: Wizards of the Coast Event Coverage") +
+            theme_bw() +
+            theme(axis.text.y = element_text(angle = 40)) +
+            scale_y_continuous(labels = comma)
+    })
+    
+    output$dataset <- renderDataTable(datatable({
+        if(input$table == "All Cards") {
+            data <- full_table
+        }
+        
+        if(input$table == "Tournament Cards") {
+            data <- tournament_cards
+        }
+        
+        data
+    }))
+    
+    output$rare_regression <- renderPlotly({
+        rare_regression <- full_table %>%
+            filter(! is.na(price), price < 50, str_detect(types, "Creature") == TRUE) %>%
+            ggplot(aes(x = releaseDate, y = price, color = rarity)) +
+            geom_jitter(width = 0.1, alpha = 0.4) +
+            geom_smooth(method = "lm", se = FALSE) +
+            theme_bw() +
+            labs(x = "Release Date", y = "Price", color = "Rarity") +
+            scale_color_manual(values = c("black", "cyan", "yellow", "darkorange"))
+        
+        ggplotly(rare_regression)
+        
+        
+        # full_table %>% 
+        #     filter(! is.na(price), price < 20, str_detect(types, "Creature") == TRUE) %>% 
+        #     plot_ly(
+        #         type = 'scatter',
+        #         mode = 'markers',
+        #         x = ~releaseDate,
+        #         y = ~price,
+        #         color  = ~rarity,
+        #         hoverinfo = 'text',
+        #         text = ~paste("Release Date:", releaseDate, "<br>",
+        #                      "Price:", price, "<br>",
+        #                      "Rarity:", rarity, "<br>",
+        #                      "Card Name:", name_card, "<br>")
+        #     )
+    })
 
 }
 
