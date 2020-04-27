@@ -12,7 +12,10 @@ library(lubridate) # "Working with dates" package
 library(infer) # "Statistical analysis" package
 library(skimr) # "Fancy summary" package
 library(broom) # "Tidy lm" package
+library(ggthemes) # "Pretty ggplot" package
 library(gganimate) # "Animated graphs" package
+library(plotly) # "ggplot alternative (hover!)" package
+library(scales) # "Fancy scales" package
 library(rsconnect) # "Shiny app upload" package
 library(tidymodels) # "Uniform regression / fit functions" package
 library(rpart.plot) # "Grpahing CART trees" package
@@ -287,6 +290,8 @@ decks <- rbind(decks_2015, decks_2016, decks_2017, decks_2018, decks_2020) %>%
 
 decks$duplicates <- as.numeric(decks$duplicates)
 
+decks$year <- as_factor(decks$year)
+
 split_cards <- decks %>% 
   filter(str_detect(decks$card_name, "//") == TRUE) %>% 
   distinct(card_name) %>%  
@@ -425,7 +430,10 @@ full_table <- cards %>%
          loyalty = as.numeric(loyalty),
          in_tournament = ifelse(name_card %in% decks$card_name |
                                 paste0(name_card, " ") %in% decks$card_name |
-                                name_card %in% split_cards$first, 1, 0)) %>% 
+                                name_card %in% split_cards$first, 1, 0),
+         rarity = factor(rarity,
+                         levels = c("common", "uncommon", "rare", "mythic"),
+                         ordered = TRUE)) %>% 
   select(index, id, price, name_card, names, power, toughness, loyalty,
          convertedManaCost, manaCost, colors, colorIdentity, supertypes, types,
          subtypes, rarity, text, layout, name_set, mcmName, setCode,
@@ -443,7 +451,7 @@ decks_full_table <- decks %>%
   select(-in_tournament, -index, -id)
 ```
 
-```{r graph_earnings}
+```{r graphs_ggplot}
 ggdecks <- decks %>% 
   group_by(player, winnings_dollars) %>% 
   summarize() %>% 
@@ -464,11 +472,39 @@ highest earners are skewed towards recent years due to higher prize pools",
   xlab("Player") +
   ylab("Total Winnings ($)") +
   theme_bw() +
-  theme(axis.text.y = element_text(angle = 40))
+  theme(axis.text.y = element_text(angle = 40)) +
+  scale_y_continuous(labels = comma)
 
-ggsave("earnings.png",
-       plot = earnings,
-       path = "shiny_magic")
+earnings
+
+
+breakdown <- decks_full_table %>% 
+  mutate(types = ifelse(str_detect(types, "Creature") == TRUE, "Creature", types)) %>% 
+  filter(player == "Paulo Vitor Damo da Rosa") %>% 
+  count(year, types, duplicates) %>% 
+  group_by(year, types) %>% 
+  summarize(num_cards = sum(duplicates * n)) %>% 
+  ggplot(aes(x = types, y = num_cards, fill = year)) +
+  geom_col() +
+  labs(title = "Deck Breakdown by Card Type and Player",
+       x = "Types",
+       y = "Count",
+       fill = "Player") +
+  theme_fivethirtyeight()
+
+ggplotly(breakdown)
+
+
+full_table %>% 
+  filter(! is.na(price), price < 20, str_detect(types, "Creature") == TRUE) %>% 
+  ggplot(aes(x = releaseDate, y = price, color = rarity)) +
+  geom_jitter(width = 0.1, alpha = 0.4) +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw() +
+  labs(x = "Release Date", y = "Price", color = "Rarity") +
+  scale_color_manual(values = c("black", "cyan", "yellow", "darkorange"))
+  
+# transition_manual(name_set)??
 ```
 
 ```{r graphs_test}
