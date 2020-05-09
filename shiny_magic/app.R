@@ -1,17 +1,24 @@
-library(shiny)
-library(DT)
-library(shinythemes)
-library(ggthemes)
-library(scales)
-library(rmarkdown)
-library(plotly)
-library(tidyverse)
+# At the outset, it may be helpful to remember that this will all be converted
+# to HTML, and can be thought of as such beneath all of the R / Tidyverse
+# functionality
+
+library(shiny) # "Basic functionality" package 
+library(DT) # "Showing data tables" package
+library(shinythemes) # "CSS EZ-PZ" package
+library(ggthemes) # "Pretty ggplot" package
+library(scales) # "Fancy scales" package
+library(plotly) # "ggplot alternative (hover!)" package
+library(tidyverse) # "The" package
+
+# Reading in data tables from read_in.Rmd
 
 full_table <- read_rds("full_table.rds")
 
 decks_full_table <- read_rds("decks_full_table.rds")
 
 tournament_cards <- read_rds("tournament_cards.rds")
+
+# Creating lists for selectInput() later
 
 player_names <- unique(decks_full_table$player)
 
@@ -20,10 +27,15 @@ tables <- list("All Cards", "Tournament Cards")
 
 ui <- fluidPage(theme = shinytheme("flatly"),
         
+        # Centering all text
+        
         fluidRow(
             
             column(12,
                    align = "center",
+                   
+        # End of centering text code
+        
                    navbarPage("This is Magic",
                     
                    
@@ -39,6 +51,8 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                               
                               h3("Deck Breakdowns by Year and Card Type"),
                               
+                              # Use br() to create aesthetic space between elements
+                              
                               br(),
                               
                          sidebarLayout(
@@ -48,7 +62,13 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                                  helpText("Select Player and Card Types to View Deck Breakdown"),
                                  
                                  selectInput("player_names_breakdown", h3("Player:"), choices = player_names,
-                                             selected = "Paulo Vitor Damo da Rosa")
+                                             selected = "Paulo Vitor Damo da Rosa"),
+                                 
+                                 p("About the Graph: Creature cards were favored heavily in the 2016 and 2017 championships,
+                                   indicating a slower metagame based on the sets that were in Standard at the time. In contrast,
+                                   creature cards were given less focus in favor of instants in the 2015 and 2020 championships,
+                                   indicating a faster-paced metagame. Of course, this all depends on the player's style of play,
+                                   so these are more general statements.")
                              ),
                              
                              mainPanel(
@@ -104,7 +124,8 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                               sidebarLayout(
                                   
                                   sidebarPanel(
-                                      p("Mythic-rare cards were introduced in the early 2010s, and their price has the smallest associated
+                                      
+                                      p("About the Graph: Mythic-rare cards were introduced in the early 2010s, and their price has the smallest associated
                                         decrease. They are incredibly hard to find, which makes it a likely candidate as a contributor to price.
                                         That said, it is obvious from this graph that on average, the price of all cards is decreasing over time.
                                         This is mainly the result of Wizards of the Coast refining their card R&D, where cards no longer overthrow
@@ -198,21 +219,21 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                  
                  br(),
                  
-                 h4("Areas for Improvement"),
-                 
-                 tags$ul(
-                     tags$li("Adding card name and textbox to regression plot's hover template (currently ggplotly() is confusing to work with"),
-                     tags$li("Adding 'year' (with 'all') inputs for both graphs in Model tab (especially for earnings plot"),
-                     tags$li("Adding analysis and takeaways for each plot (and, if some already exists, possibly adding more)"),
-                     tags$li("Converting shinytheme to 'cyborg' while keeping data tables in the Explore tab visible (currently unable to)"),
-                     tags$li("Making all header text mythic orange (possible with 'includeCSS()')"),
-                     tags$li("Adding functionality to exploring datasets (selecting columns, etc)"),
-                     tags$li("Commenting all code"),
-                     tags$li("Adding more statistical analysis graphs (tournament viability specifically, but also more concerning price)"),
-                     tags$li("slider input for max price of statistical analysis graph")
-                 ),
-                 
-                 br(),
+                 # h4("Areas for Improvement"),
+                 # 
+                 # tags$ul(
+                 #     tags$li("Adding card name and textbox to regression plot's hover template (currently ggplotly() is confusing to work with"),
+                 #     tags$li("Adding 'year' (with 'all') inputs for both graphs in Model tab (especially for earnings plot"),
+                 #     tags$li("Adding analysis and takeaways for each plot (and, if some already exists, possibly adding more)"),
+                 #     tags$li("Converting shinytheme to 'cyborg' while keeping data tables in the Explore tab visible (currently unable to)"),
+                 #     tags$li("Making all header text mythic orange (possible with 'includeCSS()')"),
+                 #     tags$li("Adding functionality to exploring datasets (selecting columns, etc)"),
+                 #     tags$li("Commenting all code"),
+                 #     tags$li("Adding more statistical analysis graphs (tournament viability specifically, but also more concerning price)"),
+                 #     tags$li("slider input for max price of statistical analysis graph")
+                 # ),
+                 # 
+                 # br(),
                  
                  h4("About the Creator"),
                  
@@ -291,22 +312,6 @@ server <- function(input, output) {
             scale_color_manual(values = c("black", "cyan", "yellow", "darkorange"))
         
         ggplotly(rare_regression)
-        
-        
-        # full_table %>% 
-        #     filter(! is.na(price), price < 20, str_detect(types, "Creature") == TRUE) %>% 
-        #     plot_ly(
-        #         type = 'scatter',
-        #         mode = 'markers',
-        #         x = ~releaseDate,
-        #         y = ~price,
-        #         color  = ~rarity,
-        #         hoverinfo = 'text',
-        #         text = ~paste("Release Date:", releaseDate, "<br>",
-        #                      "Price:", price, "<br>",
-        #                      "Rarity:", rarity, "<br>",
-        #                      "Card Name:", name_card, "<br>")
-        #     )
     })
 
 }

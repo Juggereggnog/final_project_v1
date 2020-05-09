@@ -1,10 +1,3 @@
----
-title: "Reading In"
-author: "Elias DeLeon"
-date: "2/28/2020"
-output: html_document
----
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, options(scipen=999))
 
@@ -18,13 +11,19 @@ library(plotly) # "ggplot alternative (hover!)" package
 library(scales) # "Fancy scales" package
 library(rsconnect) # "Shiny app upload" package
 library(tidymodels) # "Uniform regression / fit functions" package
-library(rpart.plot) # "Grpahing CART trees" package
+library(rpart.plot) # "Graphing CART trees" package
 library(tidyverse) # "The" package
 ```
 
-Link to GitHub Repository: https://github.com/Juggereggnog/final_project_v1
-
 ```{r functions, include=FALSE}
+
+# Thank you 3000 to Alyssa Huberts (my awesome TF for help with the regular
+# expressions and deckify() in general); read_table only works when each line is
+# a fixed length, so I had to use read_delim to manually work with each line;
+# nchar() is a good way to handle the variability between lines, and as can be
+# seen, the reference positions in substr() can be added to / subtracted from
+# for maximum flexibility in capturing the patterns (and removing whitespace)
+
 deckify <- function(data) {
   sample_deck <- read_delim(data, delim = "\n", col_names = FALSE) %>% 
     mutate(duplicates = str_extract(X1, "\\d{0,3}"),
@@ -38,11 +37,17 @@ deckify <- function(data) {
            X1 = NULL)
 }
 
+# Abstracting the file path listings by pasting the year to their common file;
+# this is for later when I create the deck tibble for all cards in a given
+# year's tournament
+
 find_folder <- function(x) {
   list.files(path = paste0("magic_world_championships/magic_worlds_", x),
                     pattern = "*.txt",
                     full.names = TRUE)
 }
+
+# For the files with names listed in last, first format
 
 recool <- function(x) {
   x %>%   
@@ -52,6 +57,9 @@ recool <- function(x) {
 ```
 
 ```{r files, include=FALSE}
+
+# Assigning file names to objects by year
+
 files_2015 <- find_folder(2015)
 
 files_2016 <- find_folder(2016)
@@ -61,11 +69,21 @@ files_2017 <- find_folder(2017)
 files_2018 <- find_folder(2018)
 
 files_2020 <- find_folder(2020)
-
-files <- c(files_2015, files_2016, files_2017, files_2018, files_2020)
 ```
 
 ```{r decks, include=FALSE}
+
+# This is a bit of an odd work-around for reading the file correctly while also
+# extracting the player's name from the file name (the only place it was
+# located); a tibble is created with only column "File," then extract() does its
+# thing to get the name out of the file. Use remove = FALSE or else the file
+# path gets deleted from the tibble and can no longer be used to find the file
+# path
+
+# Each year has its own object because each requires its own regular expression
+# in extract(); abstraction should be possible here, with regex and year
+# arguments
+
 decks_2015 <- tibble(File = files_2015) %>%
     extract(File, "player", "-(.*)'", remove = FALSE) %>%
     mutate(Data = map(File, deckify)) %>%
@@ -101,6 +119,11 @@ decks_2020 <- tibble(File = files_2020) %>%
     mutate(year = 2020,
            player = map(strsplit(player, "-"), paste, collapse = " ")) %>% 
     select(-File)
+
+# Combining all decks into one using rbind(), and manually changing names for
+# self-consistency within the tibble, as well as manually adding in rankings and
+# earnings for each player, for each year; unknown if automation was possible
+# here
 
 decks <- rbind(decks_2015, decks_2016, decks_2017, decks_2018, decks_2020) %>% 
   unnest(player) %>% 
@@ -276,6 +299,12 @@ decks <- rbind(decks_2015, decks_2016, decks_2017, decks_2018, decks_2020) %>%
                    (year == 2020 & player == "Andrea Mengucci") ~ 12500,
                    (year == 2020 & player == "Matias Leveratto") ~ 12500,
            TRUE ~ 9999999),
+         
+         # For some reason, spaces were present at the end of some cards
+         # (inexplicable), so I mutated card_name for those edge cases; I then
+         # handled the edge case of split cards having " // " to contain two
+         # cards in a single row
+         
          card_name = map(card_name,
                          ~ ifelse(str_detect(., " $") == TRUE,
                                   substr(.,
@@ -288,9 +317,14 @@ decks <- rbind(decks_2015, decks_2016, decks_2017, decks_2018, decks_2020) %>%
   unnest(card_name) %>% 
   select(-gatherer_id, -from_set)
 
+# Manually coercing columns to desired data types
+
 decks$duplicates <- as.numeric(decks$duplicates)
 
 decks$year <- as_factor(decks$year)
+
+# When joining the full table to the decks table, it only uses the "first"
+# column, which is yet another methodological limitation of this project
 
 split_cards <- decks %>% 
   filter(str_detect(decks$card_name, "//") == TRUE) %>% 
@@ -299,6 +333,11 @@ split_cards <- decks %>%
 ```
 
 ```{r mtgjson}
+
+# When reading in a .csv file for the first time, it gives an annoying message
+# detailing the column specifications, but you can copy/paste that into your
+# code to avoid the message (was guess_max = 200000 what sped up the read time?)
+
 cards <- read_csv("AllPrintingsCSVFiles/cards.csv",
                   guess_max = 200000,
                   col_types = cols(
@@ -416,6 +455,12 @@ sets <- read_csv("AllPrintingsCSVFiles/sets.csv",
 ```
 
 ```{r joining_tables, warning=FALSE}
+
+# Open question: why does putting distinct() before the filter() result in
+# losing 4000 rows extra rows?; the power and toughness mutates handle edge
+# cases of creatures with "negative power/toughness" (according to the raw data)
+# and creatures with star stats (variable based on conditions in text box)
+
 full_table <- cards %>% 
   left_join(sets, by = c("setCode" = "code"), suffix = c("_card", "_set")) %>% 
   left_join(prices, by = "uuid") %>% 
@@ -428,12 +473,21 @@ full_table <- cards %>%
          toughness = ifelse(toughness > 0, as.numeric(toughness), 0),
          toughness = ifelse(is.na(toughness) & types == "Creature", 0, power),
          loyalty = as.numeric(loyalty),
+         
+         # Creating a conditional to subset the data later
+         
          in_tournament = ifelse(name_card %in% decks$card_name |
                                 paste0(name_card, " ") %in% decks$card_name |
                                 name_card %in% split_cards$first, 1, 0),
+         
+         # Factorized rarity for use in ggplots
+         
          rarity = factor(rarity,
                          levels = c("common", "uncommon", "rare", "mythic"),
                          ordered = TRUE)) %>% 
+  
+  # There are other columns I decided not to include; delete select() to peruse
+  
   select(index, id, price, name_card, names, power, toughness, loyalty,
          convertedManaCost, manaCost, colors, colorIdentity, supertypes, types,
          subtypes, rarity, text, layout, name_set, mcmName, setCode,
@@ -446,12 +500,18 @@ full_table <- cards %>%
 tournament_cards <- full_table %>% 
   filter(in_tournament == 1)
 
+# Joining card information to decks table
+
 decks_full_table <- decks %>% 
   inner_join(tournament_cards, by = c("card_name" = "name_card")) %>% 
   select(-in_tournament, -index, -id)
 ```
 
 ```{r graphs_ggplot}
+
+# double group_by()s feel inelegant; is there a better way? (is the 10
+# necessary?)
+
 ggdecks <- decks %>% 
   group_by(player, winnings_dollars) %>% 
   summarize() %>% 
@@ -460,6 +520,9 @@ ggdecks <- decks %>%
   summarize(total_winnings = sum(winnings_dollars)) %>% 
   arrange(desc(total_winnings)) %>% 
   head(10)
+
+# fct_reorder here orders the players from most to least winnings (useful!);
+# use coord_flip() when x-axis uses multiple factors (names, etc.)
 
 earnings <- ggplot(ggdecks,
                    aes(fct_reorder(player, total_winnings), total_winnings)) +
@@ -479,7 +542,8 @@ earnings
 
 
 breakdown <- decks_full_table %>% 
-  mutate(types = ifelse(str_detect(types, "Creature") == TRUE, "Creature", types)) %>% 
+  mutate(types = ifelse(str_detect(types, "Creature") == TRUE,
+                        "Creature", types)) %>% 
   filter(player == "Paulo Vitor Damo da Rosa") %>% 
   count(year, types, duplicates) %>% 
   group_by(year, types) %>% 
@@ -495,7 +559,27 @@ breakdown <- decks_full_table %>%
 ggplotly(breakdown)
 
 
-full_table %>% 
+breakdown_cmc <- decks_full_table %>% 
+  mutate(types = ifelse(str_detect(types, "Creature") == TRUE,
+                        "Creature", types)) %>% 
+  filter(player == "Paulo Vitor Damo da Rosa") %>% 
+  count(year, convertedManaCost, duplicates) %>% 
+  group_by(year, convertedManaCost) %>% 
+  summarize(num_cards = sum(duplicates * n)) %>% 
+  ggplot(aes(x = convertedManaCost, y = num_cards, fill = year)) +
+  geom_col() +
+  labs(title = "Deck Breakdown by Mana Cost and Player",
+       x = "Types",
+       y = "Count",
+       fill = "Player") +
+  theme_fivethirtyeight()
+
+# ggplotly() is a super convenient way to convert ggplots to plotly format
+
+ggplotly(breakdown_cmc)
+
+
+rare_regression <- full_table %>% 
   filter(! is.na(price), price < 20, str_detect(types, "Creature") == TRUE) %>% 
   ggplot(aes(x = releaseDate, y = price, color = rarity)) +
   geom_jitter(width = 0.1, alpha = 0.4) +
@@ -503,71 +587,14 @@ full_table %>%
   theme_bw() +
   labs(x = "Release Date", y = "Price", color = "Rarity") +
   scale_color_manual(values = c("black", "cyan", "yellow", "darkorange"))
-  
-# transition_manual(name_set)??
-```
 
-```{r graphs_test}
-full_table %>% 
-  select(power, price, toughness) %>% 
-  filter(! is.na(power), ! is.na(price), ! is.na(toughness)) %>% 
-  cor()
-
-
-ggplot(full_table, aes(rarity)) +
-  geom_bar()
-
-
-ggplot(full_table, aes(toughness, price, color = rarity)) +
-  geom_point() +
-  geom_jitter(alpha = 0.4) +
-  labs(y = "Price") +
-  scale_y_continuous(limits = c(0, 1000))
-
-
-rare_model <- lm(price ~ rarity, data = full_table)
-
-rare_model %>% 
-  tidy(conf.int = TRUE) %>% 
-  select(term, estimate, conf.low, conf.high)
-
-
-tournament_model <- lm(price ~ in_tournament, data = full_table)
-
-tournament_model %>% 
-  tidy(conf.int = TRUE) %>% 
-  select(term, estimate, conf.low, conf.high)
-
-
-stats_model <- lm(price ~ power + toughness + rarity + in_tournament +
-                          types + colors + convertedManaCost + name_set +
-                          edhrecRank,
-                  data = full_table)
-
-stats_model %>% 
-  tidy(conf.int = TRUE) %>% 
-  select(term, estimate, conf.low, conf.high)
-
-
-# tree_mod <- decision_tree() %>%
-#   set_engine("rpart",
-#              model = TRUE) %>%
-#   set_mode("classification")
-# 
-# tournament_tree <- fit(tree_mod,
-#                   factor(in_tournament) ~ power + toughness,
-#                   data = full_table)
-# 
-# tournament_tree$fit %>% 
-#   prp(extra = 4, varlen = 0, faclen = 0)
-
-# CART classification, tree for determining if card was in tournament
-# usually a predictive model (with categorical outcomes)
-
-# regression is more of an explanatory model
+ggplotly(rare_regression)
 ```
 
 ```{r saving}
+
+# Saving necessary data tables in .rds format to read into shiny app
+
 write_rds(full_table, "shiny_magic/full_table.rds")
 
 write_rds(decks_full_table, "shiny_magic/decks_full_table.rds")
